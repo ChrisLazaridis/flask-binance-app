@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Edit Account{% endblock %}
+{% block content %}
+<form method="POST">
+        <h3 allign="center">Edit your binance API information in case the application doesn't work properly!</h3>
+        <div class="form-group">
+            <label for="binanceKey">Binance API Authenticator Key</label>
+            <input type="text" class="form-control" id="binanceKey" name="binanceKey" placeholder="binance API key" title="Note: API key resets after 30 days, make sure you update it with the same key, otherwise your account will be turned useless!"/>
+        </div>
+        <div class="form-group">
+            <label for="binanceSecret">Binance API Secret Key</label>
+            <input type="text" class="form-control" id="binanceSecret" name="binanceSecret" placeholder="binance API Secret Key" title="Note: for privacy, edit the permissions so you stay safe, your info will be hashed!"/>
+        </div>
+        <div class="form-group">
+            <label for="newPassword1">Password</label>
+            <input type="password" class="form-control" id="newPassword1" name="newPassword1" placeholder="new password"/>
+        </div>
+        <div class="form-group">
+            <label for="newPassword2">Password</label>
+            <input type="password" class="form-control" id="newPassword2" name="newPassword2" placeholder="confirm new password"/>
+        </div>
+        <div class="form-group">
+            <label for="passwordc">Password</label>
+            <input type="password" class="form-control" id="passwordc" name="passwordc" placeholder="current password"/>
+        </div>
+        <br/>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="reset" class="btn btn-secondary">Clear</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="00473387-3ac8-42ec-baac-8ce81548e032" name="Changes" comment="z" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Flask Main" />
+        <option value="Python Script" />
+        <option value="JavaScript File" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2MNEffEkV9NKhde8FKlSye8qq4U" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/claza/PycharmProjects/flaskProject/website/app.py",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Flask server.flaskProject">
+    <configuration name="Flask app" type="PythonConfigurationType" factoryName="Python">
+      <module name="flaskProject" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1 FLASK_ENV=development FLASK_DEBUG = 1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\claza\PycharmProjects\flaskProject\venv\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.10 (venv)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/website" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/website/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="flaskProject" type="Python.FlaskServer">
+      <module name="flaskProject" />
+      <option name="target" value="$PROJECT_DIR$/website/__init__.py" />
+      <option name="targetType" value="PATH" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="00473387-3ac8-42ec-baac-8ce81548e032" name="Changes" comment="" />
+      <created>1677599745431</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1677599745431</updated>
+      <workItem from="1677599907028" duration="9341000" />
+      <workItem from="1677690692878" duration="1996000" />
+      <workItem from="1677736085989" duration="4524000" />
+      <workItem from="1677752148559" duration="1017000" />
+      <workItem from="1677769188625" duration="36000" />
+      <workItem from="1678112159451" duration="2122000" />
+      <workItem from="1678114302055" duration="3205000" />
+      <workItem from="1678207753270" duration="687000" />
+      <workItem from="1678299997272" duration="371000" />
+      <workItem from="1678300384647" duration="2134000" />
+      <workItem from="1678328435670" duration="112000" />
+      <workItem from="1678333400954" duration="2129000" />
+      <workItem from="1678372160142" duration="472000" />
+      <workItem from="1678457025817" duration="3319000" />
+      <workItem from="1678626554197" duration="970000" />
+      <workItem from="1678705252395" duration="1877000" />
+      <workItem from="1678707246417" duration="1639000" />
+      <workItem from="1678708971281" duration="8608000" />
+      <workItem from="1678719965004" duration="4544000" />
+      <workItem from="1678728644861" duration="1204000" />
+      <workItem from="1678730894573" duration="96000" />
+      <workItem from="1678775494442" duration="1199000" />
+      <workItem from="1678776805786" duration="922000" />
+      <workItem from="1678780512098" duration="4734000" />
+      <workItem from="1678831858908" duration="2268000" />
+      <workItem from="1679011132603" duration="305000" />
+      <workItem from="1679149027733" duration="1746000" />
+      <workItem from="1679433797473" duration="83000" />
+      <workItem from="1679438153502" duration="125000" />
+      <workItem from="1679759709523" duration="3475000" />
+      <workItem from="1679837618524" duration="3680000" />
+      <workItem from="1679841402730" duration="1549000" />
+      <workItem from="1679842986264" duration="56000" />
+    </task>
+    <task id="LOCAL-00001" summary="some changes... still doesn't work">
+      <created>1678782694642</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678782694642</updated>
+    </task>
+    <task id="LOCAL-00002" summary="some changes... still doesn't work (2)">
+      <created>1678784504554</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1678784504554</updated>
+    </task>
+    <task id="LOCAL-00003" summary="some changes... still doesn't work (2)">
+      <created>1678784519006</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1678784519007</updated>
+    </task>
+    <task id="LOCAL-00004" summary="some changes... still doesn't work (3)">
+      <created>1678785449587</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1678785449587</updated>
+    </task>
+    <task id="LOCAL-00005" summary="some changes... still doesn't work (4)">
+      <created>1678834129170</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1678834129170</updated>
+    </task>
+    <task id="LOCAL-00006" summary="no changes... still doesn't work (5)">
+      <created>1679841355579</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1679841355579</updated>
+    </task>
+    <task id="LOCAL-00007" summary="no changes... still doesn't work (5)">
+      <created>1679841463508</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1679841463508</updated>
+    </task>
+    <task id="LOCAL-00008" summary="no changes... still doesn't work (6)">
+      <created>1679841653188</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679841653188</updated>
+    </task>
+    <task id="LOCAL-00009" summary="z">
+      <created>1679842521402</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1679842521402</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+      <path value="$PROJECT_DIR$/website" />
+    </ignored-roots>
+    <MESSAGE value="some changes... still doesn't work" />
+    <MESSAGE value="some changes... still doesn't work (2)" />
+    <MESSAGE value="some changes... still doesn't work (3)" />
+    <MESSAGE value="some changes... still doesn't work (4)" />
+    <MESSAGE value="no changes... still doesn't work (5)" />
+    <MESSAGE value="no changes... still doesn't work (6)" />
+    <MESSAGE value="z" />
+    <option name="LAST_COMMIT_MESSAGE" value="z" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/flaskProject$flaskProject.coverage" NAME="flaskProject Coverage Results" MODIFIED="1678705789461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/flaskProject$Flask_app.coverage" NAME="Flask app Coverage Results" MODIFIED="1679840406487" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/website" />
+  </component>
+</project>

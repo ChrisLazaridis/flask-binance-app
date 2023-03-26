@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Equity{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1 class="mt-5">Binance Equity</h1>
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th>Asset</th>
+                    <th>Free</th>
+                    <th>Locked</th>
+                    <th>USD Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for balance in balances %}
+                    <tr>
+                        <td>{{ balance.asset }}</td>
+                        <td>{{ balance.free }}</td>
+                        <td>{{ balance.locked }}</td>
+                        <td>{{ balance.usd_value }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
