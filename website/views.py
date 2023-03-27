@@ -22,22 +22,22 @@ class BinanceAPI:
         try:
             return self.client.get_account()
         except BinanceAPIException as e:
-            flash(str(e), category='error')
+            print(str(e))
             return None
 
     def get_my_trades(self, symbol, start_time):
         try:
             return self.client.get_my_trades(symbol=symbol, startTime=start_time)
         except BinanceAPIException as e:
-            flash(str(e), category='error')
+            print(str(e))
             return None
 
 def validate_inputs(duration, symbol_pair):
     if symbol_pair not in [f"{s1}{s2}" for s1 in SYMBOLS for s2 in SYMBOLS if s1 != s2]:
-        flash("Invalid symbol pair selected", category='error')
+        print("Invalid symbol pair selected")
         return False
     if duration not in DURATION_OPTIONS:
-        flash("Invalid duration selected", category='error')
+        print("Invalid duration selected")
         return False
     else:
         return True
@@ -78,7 +78,7 @@ def manager():
     binance_api = BinanceAPI(current_user.key, current_user.secret_key)
     account_info = binance_api.get_account_info()
     if not account_info:
-        return redirect(url_for('views.manager'))
+        return redirect(url_for('views.home'))
 
     balances = {}
     for balance in account_info['balances']:
@@ -89,17 +89,17 @@ def manager():
             balances[asset] = free + locked
 
     duration = request.form.get('duration') if request.method == 'POST' else '1 month'
-    symbol_pair = request.form.get('symbol_pair') if request.method == 'POST' else None
+    symbol_pair = request.form.get('symbol_pair') if request.method == 'POST' else 'BTCUSDT'
 
     if not validate_inputs(duration, symbol_pair):
-        flash("Invalid input parameters", category='error')
-        return redirect(url_for('views.manager'))
+        print("Invalid input parameters")
+        return redirect(url_for('views.home'))
 
     if symbol_pair:
         symbol1, symbol2 = symbol_pair[:3], symbol_pair[3:]
         if symbol1 not in balances or symbol2 not in balances:
-            flash("You do not have sufficient balance for the selected symbol pair", category='error')
-            return redirect(url_for('views.manager'))
+            print("You do not have sufficient balance for the selected symbol pair")
+            return redirect(url_for('views.home'))
 
     if duration == '1 month':
         end_time = datetime.datetime.now(pytz.utc)
@@ -120,8 +120,8 @@ def manager():
         start_time = None
         end_time = None
     else:
-        flash("Invalid duration selected", category='error')
-        return redirect(url_for('views.manager'))
+        print("Invalid duration selected")
+        return redirect(url_for('views.home'))
 
     trades = []
     if symbol_pair and start_time and end_time:
