@@ -1,27 +1,64 @@
 {% extends "base.html" %}
 {% block title %}Equity{% endblock %}
 {% block content %}
-    <div class="container">
-        <h1 class="mt-5">Binance Equity</h1>
-        <table class="table mt-5">
-            <thead>
-                <tr>
-                    <th style="color:white">Asset</th>
-                    <th style="color:white">Free</th>
-                    <th style="color:white">Locked</th>
-                    <th style="color:white">USD Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for balance in balances %}
-                    <tr>
-                        <td style="color:white">{{ balance.asset }}</td>
-                        <td style="color:white">{{ balance.free }}</td>
-                        <td style="color:white">{{ balance.locked }}</td>
-                        <td style="color:white">{{ balance.usd_value }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+<style>
+    th.dark-theme, td.dark-theme {
+        border: 1px solid #2c3e50;
+        color: #f5f5f5;
+    }
+    th.light-theme, td.light-theme {
+        border: 1px solid #f5f5f5;
+        color: #2c3e50;
+    }
+</style>
+
+<div class="container">
+    <h1 class="mt-5">Binance Equity</h1>
+    <table class="table mt-5">
+        <thead>
+            <tr>
+                <th class="dark-theme">Asset</th>
+                <th class="dark-theme">Free</th>
+                <th class="dark-theme">Locked</th>
+                <th class="dark-theme">USD Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for balance in balances %}
+            <tr>
+                <td class="dark-theme">{{ balance.asset }}</td>
+                <td class="dark-theme">{{ balance.free }}</td>
+                <td class="dark-theme">{{ balance.locked }}</td>
+                <td class="dark-theme">{{ balance.usd_value }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script>
+    let th = document.getElementsByTagName('th');
+    let td = document.getElementsByTagName('td');
+    modeSwitch.addEventListener("change", () => {
+        if (modeSwitch.checked) {
+            for (let i = 0; i < th.length; i++) {
+                th[i].classList.remove('light-theme');
+                th[i].classList.add('dark-theme');
+            }
+            for (let i = 0; i < td.length; i++) {
+                td[i].classList.remove('light-theme');
+                td[i].classList.add('dark-theme');
+            }
+        } else {
+            for (let i = 0; i < th.length; i++) {
+                th[i].classList.remove('dark-theme');
+                th[i].classList.add('light-theme');
+            }
+            for (let i = 0; i < td.length; i++) {
+                td[i].classList.remove('dark-theme');
+                td[i].classList.add('light-theme');
+            }
+        }
+    });
+</script>
 {% endblock %}
+

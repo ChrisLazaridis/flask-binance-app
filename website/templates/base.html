@@ -17,14 +17,18 @@
 
     <title>{% block title %}Home{% endblock %}</title>
     <style>
-        body {
+        body.dark-theme {
             background-color: #2c3e50;
-            color: white;
+            color: #f5f5f5;
+        }
+        body.light-theme {
+            background-color: #f5f5f5;
+            color: #2c3e50;
         }
     </style>
 
   </head>
-  <body>
+  <body class="dark-theme">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <button
         class="navbar-toggler"
@@ -43,6 +47,12 @@
         <a class="nav-item nav-link" id="analyzer" href="/">Welcome</a>
     {% endif %}
   </div>
+          <div class="navbar-nav">
+              <div class="nav-item nav-link custom-control custom-switch">
+                  <input type="checkbox" class="custom-control-input" id="modeSwitch" checked>
+                  <label id="modeSwitchLabel" class="custom-control-label" for="modeSwitch">Dark Mode</label>
+              </div>
+            </div>
   {% if user.is_authenticated %}
   <div class="navbar-nav">
     <a class="nav-item nav-link" id="editAccInfo" href="/edit-account">Edit Information</a>
@@ -104,6 +114,21 @@
   });
   }
 </script>
+    <script>
+        let modeSwitch = document.getElementById('modeSwitch');
+        let modeSwitchLabel = document.getElementById('modeSwitchLabel');
+        modeSwitch.addEventListener('change', () => {
+            if (modeSwitch.checked) {
+                document.body.classList.remove('light-theme');
+                document.body.classList.add('dark-theme');
+                modeSwitchLabel.innerHTML = 'Dark Mode';
+            } else {
+                document.body.classList.remove('dark-theme');
+                document.body.classList.add('light-theme');
+                modeSwitchLabel.innerHTML = 'Light Mode';
+            }
+        });
+    </script>
 {% endblock %}
   </body>
 </html>
