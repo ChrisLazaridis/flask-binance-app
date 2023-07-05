@@ -75,68 +75,72 @@ def calculate_stats(trades):
 @views.route('/manager', methods=['GET', 'POST'])
 @login_required
 def manager():
-    binance_api = BinanceAPI(current_user.key, current_user.secret_key)
-    account_info = binance_api.get_account_info()
-    if not account_info:
-        return redirect(url_for('views.home'))
-        print("Invalid API key or secret key")
+    if request.method == 'POST':
+        symbol_pair = request.form.get('symbol_pair')
+        duration = request.form.get('duration')
+        if symbol_pair == "-":
+            flash('Please select a symbol pair', category='error')
+            return redirect(url_for('views.manager'))
+        if duration == "-":
+            flash('Please select a duration', category='error')
+            return redirect(url_for('views.manager'))
+        if not validate_inputs(duration, symbol_pair):
+            flash('you do not have sufficient data for the selected symbol and time scope', category='error')
+            return redirect(url_for('views.manager'))
+        else:
+            binance_api = BinanceAPI(current_user.key, current_user.secret_key)
+            account_info = binance_api.get_account_info()
+            if not account_info:
+                return redirect(url_for('views.home'))
+                print("Invalid API key or secret key")
+
+            balances = {}
+            for balance in account_info['balances']:
+                asset = balance['asset']
+                free = float(balance['free'])
+                locked = float(balance['locked'])
+                if free > 0 or locked > 0:
+                    balances[asset] = free + locked
+
+            if duration == '1 month':
+                end_time = datetime.datetime.now(pytz.utc)
+                start_time = end_time - datetime.timedelta(days=30)
+            elif duration == '3 months':
+                end_time = datetime.datetime.now(pytz.utc)
+                start_time = end_time - datetime.timedelta(days=90)
+            elif duration == '6 months':
+                end_time = datetime.datetime.now(pytz.utc)
+                start_time = end_time - datetime.timedelta(days=180)
+            elif duration == '9 months':
+                end_time = datetime.datetime.now(pytz.utc)
+                start_time = end_time - datetime.timedelta(days=270)
+            elif duration == '12 months':
+                end_time = datetime.datetime.now(pytz.utc)
+                start_time = end_time - datetime.timedelta(days=360)
+            elif duration == 'Lifetime':
+                start_time = None
+                end_time = None
+
+            trades = []
+            if symbol_pair and start_time and end_time:
+                trades = binance_api.get_my_trades(symbol_pair, int(start_time.timestamp() * 1000))
+                trades = [trade for trade in trades if
+                          start_time.timestamp() * 1000 <= trade['time'] <= end_time.timestamp() * 1000]
+            elif symbol_pair:
+                trades = binance_api.get_my_trades(symbol_pair, start_time)
+
+            stats = calculate_stats(trades)
+
+            return render_template('stats.html', balances=balances, trades=trades, stats=stats, duration=duration,
+                                   symbol_pair=symbol_pair, user=current_user, symbols=SYMBOLS,
+                                   duration_options=DURATION_OPTIONS)
+
+    if request.method == 'GET':
+        return render_template('manager.html', symbols=SYMBOLS, duration_options=DURATION_OPTIONS, user=current_user)
 
 
-    balances = {}
-    for balance in account_info['balances']:
-        asset = balance['asset']
-        free = float(balance['free'])
-        locked = float(balance['locked'])
-        if free > 0 or locked > 0:
-            balances[asset] = free + locked
 
-    duration = request.form.get('duration') if request.method == 'POST' else '1 month'
-    symbol_pair = request.form.get('symbol_pair') if request.method == 'POST' else 'BTCUSDT'
 
-    if not validate_inputs(duration, symbol_pair):
-        print("Invalid input parameters")
-        return redirect(url_for('views.home'))
-
-    if symbol_pair:
-        symbol1, symbol2 = symbol_pair[:3], symbol_pair[3:]
-        if symbol1 not in balances or symbol2 not in balances:
-            print("You do not have sufficient balance for the selected symbol pair")
-            return redirect(url_for('views.home'))
-
-    if duration == '1 month':
-        end_time = datetime.datetime.now(pytz.utc)
-        start_time = end_time - datetime.timedelta(days=30)
-    elif duration == '3 months':
-        end_time = datetime.datetime.now(pytz.utc)
-        start_time = end_time - datetime.timedelta(days=90)
-    elif duration == '6 months':
-        end_time = datetime.datetime.now(pytz.utc)
-        start_time = end_time - datetime.timedelta(days=180)
-    elif duration == '9 months':
-        end_time = datetime.datetime.now(pytz.utc)
-        start_time = end_time - datetime.timedelta(days=270)
-    elif duration == '12 months':
-        end_time = datetime.datetime.now(pytz.utc)
-        start_time = end_time - datetime.timedelta(days=360)
-    elif duration == 'Lifetime':
-        start_time = None
-        end_time = None
-    else:
-        print("Invalid duration selected")
-        return redirect(url_for('views.home'))
-
-    trades = []
-    if symbol_pair and start_time and end_time:
-        trades = binance_api.get_my_trades(symbol_pair, int(start_time.timestamp() * 1000))
-        trades = [trade for trade in trades if start_time.timestamp() * 1000 <= trade['time'] <= end_time.timestamp() * 1000]
-    elif symbol_pair:
-        trades = binance_api.get_my_trades(symbol_pair)
-
-    stats = calculate_stats(trades)
-
-    return render_template('manager.html', balances=balances, trades=trades, stats=stats, duration=duration,
-                           symbol_pair=symbol_pair, user=current_user, symbols=SYMBOLS,
-                           duration_options=DURATION_OPTIONS)
 
 @views.route('/equity', methods=['GET', 'POST'])
 @login_required

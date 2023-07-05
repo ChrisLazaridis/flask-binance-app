@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Statistics{% endblock %}
+{% block content %}
+  <div class="container">
+    <h1 class="mt-5">Binance Trade Analyzer</h1>
+    <div class="mt-5 mb-5">
+      <form method="POST">
+        <div class="form-group row">
+          <label for="symbol_pair" class="col-sm-2 col-form-label">Symbol Pair:</label>
+          <div class="col-sm-4">
+            <select class="form-control" id="symbol_pair" name="symbol_pair">
+             {% for symbol in symbols %}
+                {% for symbol2 in symbols %}
+                  {% if symbol != symbol2 %}
+                    <option value="{{symbol}}{{symbol2}}">{{symbol}}-{{symbol2}}</option>
+                  {% endif %}
+                {% endfor %}
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="duration" class="col-sm-2 col-form-label">Duration:</label>
+          <div class="col-sm-4">
+            <select class="form-control" id="duration" name="duration">
+              {% for duration_option in duration_options %}
+                <option value="{{duration_option}}">{{duration_option}}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-4">
+            <button type="submit" class="btn btn-primary">Calculate Stats</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    {% if stats %}
+      <div class="mt-5">
+        <h2>Statistics:</h2>
+        <p>Symbol Pair: {{selected_symbol_pair}}</p>
+        <p>Duration: {{selected_duration}}</p>
+        <p>Win Ratio: {{stats.win_ratio}}%</p>
+        <p>Loss Ratio: {{stats.loss_ratio}}%</p>
+        <p>Average Win: ${{stats.avg_win}}</p>
+        <p>Average Loss: ${{stats.avg_loss}}</p>
+        <p>Average Risk-Reward Ratio: {{stats.avg_rr}}</p>
+        <canvas id="win-loss-chart"></canvas>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        let winLossChart = new Chart(document.getElementById("win-loss-chart"), {
+          type: 'pie',
+          data: {
+            labels: ["Wins", "Losses"],
+            datasets: [{
+              backgroundColor: ["#2ecc71", "#e74c3c"],
+              data: [{{stats.num_wins}}, {{stats.num_losses}}]
+            }]
+          },
+          options: {
+            title: {
+              display: true,
+              text: 'Win/Loss Ratio'
+            }
+          }
+        });
+      </script>
+    {% endif %}
+  </div>
+{% endblock %}
