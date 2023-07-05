@@ -79,6 +79,8 @@ def manager():
     account_info = binance_api.get_account_info()
     if not account_info:
         return redirect(url_for('views.home'))
+        print("Invalid API key or secret key")
+
 
     balances = {}
     for balance in account_info['balances']:
