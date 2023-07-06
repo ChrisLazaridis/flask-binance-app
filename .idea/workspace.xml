@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00473387-3ac8-42ec-baac-8ce81548e032" name="Changes" comment="put dark theme switch using loacl storage, stats tbd">
-      <change afterPath="$PROJECT_DIR$/website/templates/stats.html" afterDir="false" />
+    <list default="true" id="00473387-3ac8-42ec-baac-8ce81548e032" name="Changes" comment="stats to be fixed but everything is functioning">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/manager.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/manager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/templates/stats.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/stats.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -204,6 +203,8 @@
       <workItem from="1688467514277" duration="1480000" />
       <workItem from="1688533467989" duration="7573000" />
       <workItem from="1688552755350" duration="48000" />
+      <workItem from="1688552826473" duration="70000" />
+      <workItem from="1688620431822" duration="3309000" />
     </task>
     <task id="LOCAL-00001" summary="some changes... still doesn't work">
       <created>1678782694642</created>
@@ -291,7 +292,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688536469107</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="stats to be fixed but everything is functioning">
+      <option name="closed" value="true" />
+      <created>1688552880725</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1688552880725</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,10 +338,11 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="put dark theme switch" />
     <MESSAGE value="put dark theme switch using loacl storage, stats tbd" />
-    <option name="LAST_COMMIT_MESSAGE" value="put dark theme switch using loacl storage, stats tbd" />
+    <MESSAGE value="stats to be fixed but everything is functioning" />
+    <option name="LAST_COMMIT_MESSAGE" value="stats to be fixed but everything is functioning" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/flask_binance_app$Flask_app.coverage" NAME="Flask app Coverage Results" MODIFIED="1688552756353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/website" />
+    <SUITE FILE_PATH="coverage/flask_binance_app$Flask_app.coverage" NAME="Flask app Coverage Results" MODIFIED="1688623213363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/website" />
     <SUITE FILE_PATH="coverage/flaskProject$Flask_app.coverage" NAME="Flask app Coverage Results" MODIFIED="1679840406487" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/website" />
     <SUITE FILE_PATH="coverage/flaskProject$flaskProject.coverage" NAME="flaskProject Coverage Results" MODIFIED="1678705789461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>

@@ -60,6 +60,8 @@ def calculate_stats(trades):
         else:
             total_losses += 1
             total_loss_amount += profit
+
+
     if total_wins > 0:
         win_ratio = total_wins / (total_wins + total_losses) * 100
         avg_win = total_win_amount / total_wins
@@ -71,7 +73,7 @@ def calculate_stats(trades):
     else:
         avg_loss = 0
     return {'total_profit': total_profit, 'total_wins': total_wins, 'total_losses': total_losses,
-            'win_ratio': win_ratio, 'avg_win': avg_win, 'avg_loss': avg_loss}
+            'win_ratio': win_ratio, 'avg_win': avg_win, 'avg_loss': avg_loss,'num_wins': total_wins,'num_losses': total_losses }
 @views.route('/manager', methods=['GET', 'POST'])
 @login_required
 def manager():
@@ -132,9 +134,7 @@ def manager():
             stats = calculate_stats(trades)
 
             return render_template('stats.html', balances=balances, trades=trades, stats=stats, duration=duration,
-                                   symbol_pair=symbol_pair, user=current_user, symbols=SYMBOLS,
-                                   duration_options=DURATION_OPTIONS)
-
+                                   symbol_pair=symbol_pair, user=current_user, symbols=SYMBOLS,duration_options=DURATION_OPTIONS, win_ratio=stats['win_ratio'], avg_win=stats['avg_win'], avg_loss=stats['avg_loss'], num_wins=stats['num_wins'], num_losses=stats['num_losses'])
     if request.method == 'GET':
         return render_template('manager.html', symbols=SYMBOLS, duration_options=DURATION_OPTIONS, user=current_user)
 
