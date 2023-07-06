@@ -1,16 +1,16 @@
-from flask import Blueprint , render_template , request , flash , redirect , url_for
-from flask_login import login_required , current_user
-from . import db
-import json
+import datetime
+
+import pytz
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
-import datetime
-import pytz
+from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask_login import login_required, current_user
+
 from .models import User
 
 views = Blueprint ( 'views' , __name__ )
 
-SYMBOLS = [ 'BTC' , 'ETH' , 'USDT' , 'ADA' , 'XRP' ]
+SYMBOLS = ['BTC', 'ETH', 'USDT', 'ADA', 'XRP', 'BNB', 'LTC', 'BCH', 'EOS', 'XLM', 'TRX', 'LINK', 'DOT', 'UNI', 'DOGE']
 DURATION_OPTIONS = [ '1 month' , '3 months' , '6 months' , '9 months' , '12 months' , 'Lifetime' ]
 
 
@@ -126,12 +126,15 @@ def manager():
             trades = []
             if symbol_pair and start_time and end_time:
                 trades = binance_api.get_my_trades(symbol_pair, int(start_time.timestamp() * 1000))
-                trades = [trade for trade in trades if
-                          start_time.timestamp() * 1000 <= trade['time'] <= end_time.timestamp() * 1000]
+                if trades:
+                    trades = [trade for trade in trades if start_time.timestamp() * 1000 <= trade['time'] <= end_time.timestamp() * 1000]
             elif symbol_pair:
                 trades = binance_api.get_my_trades(symbol_pair, start_time)
-
-            stats = calculate_stats(trades)
+            if trades:
+                stats = calculate_stats(trades)
+            else:
+                return render_template('manager.html', symbols=SYMBOLS, duration_options=DURATION_OPTIONS, user=current_user)
+                flash("you do not have sufficient data for the selected symbol and time scope", category="error")
 
             return render_template('stats.html', balances=balances, trades=trades, stats=stats, duration=duration,
                                    symbol_pair=symbol_pair, user=current_user, symbols=SYMBOLS,duration_options=DURATION_OPTIONS, win_ratio=stats['win_ratio'], avg_win=stats['avg_win'], avg_loss=stats['avg_loss'], num_wins=stats['num_wins'], num_losses=stats['num_losses'])
