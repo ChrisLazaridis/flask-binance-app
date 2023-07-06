@@ -44,6 +44,16 @@
             <h2>Statistics:</h2>
             <p>Symbol Pair: {{symbol_pair}}</p>
             <p>Duration: {{duration}}</p>
+            <p>Total Trades: {{total_trades}}</p>
+            {% if total_win_amount > total_loss_amount %}
+              {% set total_profits = total_win_amount - total_loss_amount %}
+              <p>total profit: ${{ total_profits }}</p>
+            {% elif total_win_amount < total_loss_amount %}
+              {% set total_profits = total_loss_amount - total_win_amount %}
+              <p>total loss: ${{ total_profits }}</p>
+            {% else %}
+              <p>total profit: broke even</p>
+            {% endif %}
             <p>Win Ratio: {{win_ratio}}%</p>
             <p>Average Win: ${{avg_win}}</p>
             <p>Average Loss: ${{avg_loss}}</p>

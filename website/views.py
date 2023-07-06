@@ -10,7 +10,7 @@ from .models import User
 
 views = Blueprint ( 'views' , __name__ )
 
-SYMBOLS = ['BTC', 'ETH', 'USDT', 'ADA', 'XRP', 'BNB', 'LTC', 'BCH', 'EOS', 'XLM', 'TRX', 'LINK', 'DOT', 'UNI', 'DOGE']
+SYMBOLS = ['BTC', 'ETH', 'ADA', 'XRP', 'BNB', 'LTC', 'BCH', 'EOS', 'XLM', 'TRX', 'LINK', 'DOT', 'UNI', 'DOGE']
 DURATION_OPTIONS = [ '1 month' , '3 months' , '6 months' , '9 months' , '12 months' , 'Lifetime' ]
 
 
@@ -48,7 +48,9 @@ def calculate_stats(trades):
     total_losses = 0
     total_win_amount = 0
     total_loss_amount = 0
+    total_trades = 0
     for trade in trades:
+        total_trades = total_trades + 1
         if trade['isBuyer']:
             profit = float(trade['quoteQty']) - float(trade['quoteQty']) * float(trade['commission']) / 100
         else:
@@ -73,7 +75,7 @@ def calculate_stats(trades):
     else:
         avg_loss = 0
     return {'total_profit': total_profit, 'total_wins': total_wins, 'total_losses': total_losses,
-            'win_ratio': win_ratio, 'avg_win': avg_win, 'avg_loss': avg_loss,'num_wins': total_wins,'num_losses': total_losses }
+            'win_ratio': win_ratio, 'avg_win': avg_win, 'avg_loss': avg_loss,'num_wins': total_wins,'num_losses': total_losses, 'total_trades' : total_trades, 'total_win_amount':  total_win_amount, 'total_loss_amount':total_loss_amount  }
 @views.route('/manager', methods=['GET', 'POST'])
 @login_required
 def manager():
@@ -137,8 +139,8 @@ def manager():
                 flash("you do not have sufficient data for the selected symbol and time scope", category="error")
 
             return render_template('stats.html', balances=balances, trades=trades, stats=stats, duration=duration,
-                                   symbol_pair=symbol_pair, user=current_user, symbols=SYMBOLS,duration_options=DURATION_OPTIONS, win_ratio=stats['win_ratio'], avg_win=stats['avg_win'], avg_loss=stats['avg_loss'], num_wins=stats['num_wins'], num_losses=stats['num_losses'])
-    if request.method == 'GET':
+                                   symbol_pair=symbol_pair, user=current_user, symbols=SYMBOLS,duration_options=DURATION_OPTIONS, win_ratio=stats['win_ratio'], avg_win=stats['avg_win'], avg_loss=stats['avg_loss'], num_wins=stats['num_wins'], num_losses=stats['num_losses'], total_trades = stats['total_trades'], total_profit = stats['total_profit'], total_win_amount = stats['total_win_amount'], total_loss_amount = stats['total_loss_amount'])
+    if request.method== 'GET':
         return render_template('manager.html', symbols=SYMBOLS, duration_options=DURATION_OPTIONS, user=current_user)
 
 
