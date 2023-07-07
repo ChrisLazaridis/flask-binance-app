@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="00473387-3ac8-42ec-baac-8ce81548e032" name="Changes" comment="7/6/23">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/stats.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/stats.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/website/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/base.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +207,9 @@
       <workItem from="1688634682346" duration="1395000" />
       <workItem from="1688637065209" duration="522000" />
       <workItem from="1688640370160" duration="1602000" />
-      <workItem from="1688642517482" duration="820000" />
+      <workItem from="1688642517482" duration="840000" />
+      <workItem from="1688708264845" duration="850000" />
+      <workItem from="1688713579361" duration="4013000" />
     </task>
     <task id="LOCAL-00001" summary="some changes... still doesn't work">
       <created>1678782694642</created>
@@ -327,7 +329,15 @@
       <option name="project" value="LOCAL" />
       <updated>1688642441024</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="7/6/23">
+      <option name="closed" value="true" />
+      <created>1688643347533</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1688643347533</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -371,7 +381,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="7/6/23" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/flask_binance_app$Flask_app.coverage" NAME="Flask app Coverage Results" MODIFIED="1688642706199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/website" />
+    <SUITE FILE_PATH="coverage/flask_binance_app$Flask_app.coverage" NAME="Flask app Coverage Results" MODIFIED="1688721105179" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/website" />
     <SUITE FILE_PATH="coverage/flaskProject$Flask_app.coverage" NAME="Flask app Coverage Results" MODIFIED="1679840406487" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/website" />
     <SUITE FILE_PATH="coverage/flaskProject$flaskProject.coverage" NAME="flaskProject Coverage Results" MODIFIED="1678705789461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
