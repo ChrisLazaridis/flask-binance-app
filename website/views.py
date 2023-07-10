@@ -187,3 +187,7 @@ def news():
     data = response.json()
     articles = data['articles']
     return render_template('news.html', articles=articles, user=current_user)
+@views.route('/trading', methods =['GET'])
+@login_required
+def trading():
+    return render_template('trading.html', user=current_user)
