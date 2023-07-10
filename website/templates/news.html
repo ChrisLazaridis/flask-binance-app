@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}News{% endblock %}
+{% block content %}
+<style>
+    body.dark-theme h2,
+    body.dark-theme h3,
+    body.dark-theme h4,
+    body.dark-theme h5,
+    body.dark-theme h6 {
+        color: #2c3e50;
+    }
+    body.dark-theme p {
+        color: #2c3e50;
+    }
+</style>
+<div class="container mt-4">
+    <h1 class="mb-4">Crypto News</h1>
+    <div class="row">
+      {% for article in articles %}
+        <div class="col-md-6">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title" id="atitle">{{ article.title }}</h5>
+              <p class="card-text" id="adescription">{{ article.description }}</p>
+              <a href="{{ article.url }}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Read More</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+<script>
+    let modeSwitch = document.getElementById('modeSwitch');
+    let darkModePreference = localStorage.getItem('darkModePreference');
+    let heading = document.getElementsById('atitle');
+    let paragraph = document.getElementById('adescription');
+
+    if (darkModePreference === 'true') {
+        paragraph.classList.add('dark-theme');
+        heading.classList.add('dark-theme');
+    }
+
+    modeSwitch.addEventListener('change', function() {
+    localStorage.setItem('darkModePreference', this.checked);
+
+    if (this.checked) {
+        paragraph.classList.add('dark-theme');
+        heading.classList.add('dark-theme');
+    } else {
+        paragraph.classList.remove('dark-theme');
+        heading.classList.remove('dark-theme');
+    }
+    });
+
+
+</script>
+
+
+
+{% endblock %}

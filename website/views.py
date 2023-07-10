@@ -1,6 +1,7 @@
 import datetime
 
 import pytz
+import requests
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
 from flask import Blueprint, render_template, request, flash, redirect, url_for
@@ -178,3 +179,11 @@ def equity():
 @views.route('/', methods =['GET'])
 def home():
     return render_template('home.html', user=current_user)
+@views.route('/news', methods =['GET'])
+def news():
+    api_key = 'd6a97adf83bf4f78888903ab8be92435'
+    url = f'https://newsapi.org/v2/everything?q=crypto&apiKey={api_key}&pageSize=30'
+    response = requests.get(url)
+    data = response.json()
+    articles = data['articles']
+    return render_template('news.html', articles=articles, user=current_user)
