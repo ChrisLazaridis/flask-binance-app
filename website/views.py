@@ -9,13 +9,17 @@ from flask_login import login_required, current_user
 
 from .models import User
 
-views = Blueprint ( 'views' , __name__ )
+views = Blueprint('views', __name__)
 
-SYMBOLS = ['BTC', 'ETH', 'ADA', 'XRP', 'BNB', 'LTC', 'BCH', 'EOS', 'XLM', 'TRX', 'LINK', 'DOT', 'UNI', 'DOGE']
-DURATION_OPTIONS = [ '1 month' , '3 months' , '6 months' , '9 months' , '12 months' , 'Lifetime' ]
+SYMBOLS = ['BTC', 'ETH', 'ADA', 'XRP', 'BNB', 'LTC', 'BCH', 'EOS', 'XLM', 'TRX', 'LINK', 'DOT', 'UNI', 'DOGE', 'ATOM',
+           'ICP', 'SHIB', 'KLAY', 'APE', 'BSV', 'DASH', 'UMA', 'CFX', 'MDX', 'AAVE', 'SNX', 'GLMR', 'BOBA', 'XNO']
+DURATION_OPTIONS = ['1 month', '3 months', '6 months', '9 months', '12 months', 'Lifetime']
+INTERVALS = ['1h', '4h', '12h', '1d']
 
 
 class BinanceAPI:
+
+
     def __init__(self, key, secret_key):
         self.client = Client(key, secret_key)
 
@@ -33,6 +37,7 @@ class BinanceAPI:
             print(str(e))
             return None
 
+
 def validate_inputs(duration, symbol_pair):
     if symbol_pair not in [f"{s1}{s2}" for s1 in SYMBOLS for s2 in SYMBOLS if s1 != s2]:
         print("Invalid symbol pair selected")
@@ -42,6 +47,7 @@ def validate_inputs(duration, symbol_pair):
         return False
     else:
         return True
+
 
 def calculate_stats(trades):
     total_profit = 0
@@ -64,7 +70,6 @@ def calculate_stats(trades):
             total_losses += 1
             total_loss_amount += profit
 
-
     if total_wins > 0:
         win_ratio = total_wins / (total_wins + total_losses) * 100
         avg_win = total_win_amount / total_wins
@@ -76,7 +81,11 @@ def calculate_stats(trades):
     else:
         avg_loss = 0
     return {'total_profit': total_profit, 'total_wins': total_wins, 'total_losses': total_losses,
-            'win_ratio': win_ratio, 'avg_win': avg_win, 'avg_loss': avg_loss,'num_wins': total_wins,'num_losses': total_losses, 'total_trades' : total_trades, 'total_win_amount':  total_win_amount, 'total_loss_amount':total_loss_amount  }
+            'win_ratio': win_ratio, 'avg_win': avg_win, 'avg_loss': avg_loss, 'num_wins': total_wins,
+            'num_losses': total_losses, 'total_trades': total_trades, 'total_win_amount': total_win_amount,
+            'total_loss_amount': total_loss_amount}
+
+
 @views.route('/manager', methods=['GET', 'POST'])
 @login_required
 def manager():
@@ -96,8 +105,8 @@ def manager():
             binance_api = BinanceAPI(current_user.key, current_user.secret_key)
             account_info = binance_api.get_account_info()
             if not account_info:
-                return redirect(url_for('views.home'))
                 print("Invalid API key or secret key")
+                return redirect(url_for('views.home'))
 
             balances = {}
             for balance in account_info['balances']:
@@ -130,22 +139,26 @@ def manager():
             if symbol_pair and start_time and end_time:
                 trades = binance_api.get_my_trades(symbol_pair, int(start_time.timestamp() * 1000))
                 if trades:
-                    trades = [trade for trade in trades if start_time.timestamp() * 1000 <= trade['time'] <= end_time.timestamp() * 1000]
+                    trades = [trade for trade in trades if
+                              start_time.timestamp() * 1000 <= trade['time'] <= end_time.timestamp() * 1000]
             elif symbol_pair:
                 trades = binance_api.get_my_trades(symbol_pair, start_time)
             if trades:
                 stats = calculate_stats(trades)
             else:
-                return render_template('manager.html', symbols=SYMBOLS, duration_options=DURATION_OPTIONS, user=current_user)
                 flash("you do not have sufficient data for the selected symbol and time scope", category="error")
+                return render_template('manager.html', symbols=SYMBOLS, duration_options=DURATION_OPTIONS,
+                                       user=current_user)
 
             return render_template('stats.html', balances=balances, trades=trades, stats=stats, duration=duration,
-                                   symbol_pair=symbol_pair, user=current_user, symbols=SYMBOLS,duration_options=DURATION_OPTIONS, win_ratio=stats['win_ratio'], avg_win=stats['avg_win'], avg_loss=stats['avg_loss'], num_wins=stats['num_wins'], num_losses=stats['num_losses'], total_trades = stats['total_trades'], total_profit = stats['total_profit'], total_win_amount = stats['total_win_amount'], total_loss_amount = stats['total_loss_amount'])
-    if request.method== 'GET':
+                                   symbol_pair=symbol_pair, user=current_user, symbols=SYMBOLS,
+                                   duration_options=DURATION_OPTIONS, win_ratio=stats['win_ratio'],
+                                   avg_win=stats['avg_win'], avg_loss=stats['avg_loss'], num_wins=stats['num_wins'],
+                                   num_losses=stats['num_losses'], total_trades=stats['total_trades'],
+                                   total_profit=stats['total_profit'], total_win_amount=stats['total_win_amount'],
+                                   total_loss_amount=stats['total_loss_amount'])
+    if request.method == 'GET':
         return render_template('manager.html', symbols=SYMBOLS, duration_options=DURATION_OPTIONS, user=current_user)
-
-
-
 
 
 @views.route('/equity', methods=['GET', 'POST'])
@@ -170,24 +183,32 @@ def equity():
         if ticker is None:
             b['usd_value'] = 'N/A'
         else:
-            b['usd_value'] = '{:.2f}'.format(float(ticker['price']) * float(b['free']) + float(ticker['price']) * float(b['locked']))
+            b['usd_value'] = '{:.2f}'.format(
+                float(ticker['price']) * float(b['free']) + float(ticker['price']) * float(b['locked']))
 
     # Sort balances by USD value
     balances = sorted(balances, key=lambda x: float(x['usd_value']), reverse=True)
 
     return render_template('equity.html', balances=balances, user=current_user)
-@views.route('/', methods =['GET'])
+
+
+@views.route('/', methods=['GET'])
 def home():
     return render_template('home.html', user=current_user)
-@views.route('/news', methods =['GET'])
+
+
+@views.route('/news', methods=['GET'])
 def news():
-    api_key = 'd6a97adf83bf4f78888903ab8be92435'
-    url = f'https://newsapi.org/v2/everything?q=crypto&apiKey={api_key}&pageSize=30'
-    response = requests.get(url)
-    data = response.json()
-    articles = data['articles']
-    return render_template('news.html', articles=articles, user=current_user)
-@views.route('/trading', methods =['GET'])
+    if request.method == 'GET':
+        api_key = 'd6a97adf83bf4f78888903ab8be92435'
+        url = f'https://newsapi.org/v2/everything?q=crypto&apiKey={api_key}&pageSize=30'
+        response = requests.get(url)
+        data = response.json()
+        articles = data['articles']
+        return render_template('news.html', articles=articles, user=current_user)
+
+
+@views.route('/trading', methods=['GET'])
 @login_required
 def trading():
     return render_template('trading.html', user=current_user)

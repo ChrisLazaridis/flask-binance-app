@@ -79,14 +79,16 @@ def edit_account():
                 else:
                     current_user.password = generate_password_hash ( new_password1, method='sha256' )
                     flash('password changes successfully', category= 'success')
-            if new_binance_key :
-                current_user.key = new_binance_key
-                flash ( 'binance API key changed successfully' , category = 'success' )
+            if new_binance_key:
+                if len(new_binance_key) > 12:
+                    current_user.key = new_binance_key
+                    flash('binance API key changed successfully', category='success')
             if new_binance_secret :
-                current_user.secret_key = new_binance_secret
-                flash ( 'binance API secret key changed successfully' , category = 'success' )
+                if len(new_binance_secret) > 12:
+                    current_user.secret_key = new_binance_secret
+                    flash ( 'binance API secret key changed successfully' , category = 'success' )
         else:
             flash('the password you entered is not correct', category = 'error')
 
-    return render_template ( "edit_account.html" , user = current_user )
+    return render_template("edit_account.html", user=current_user)
 
