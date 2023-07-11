@@ -2,6 +2,7 @@ import datetime
 
 import pytz
 import requests
+import openai
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
 from flask import Blueprint, render_template, request, flash, redirect, url_for
@@ -15,7 +16,7 @@ SYMBOLS = ['BTC', 'ETH', 'ADA', 'XRP', 'BNB', 'LTC', 'BCH', 'EOS', 'XLM', 'TRX',
            'ICP', 'SHIB', 'KLAY', 'APE', 'BSV', 'DASH', 'UMA', 'CFX', 'MDX', 'AAVE', 'SNX', 'GLMR', 'BOBA', 'XNO']
 DURATION_OPTIONS = ['1 month', '3 months', '6 months', '9 months', '12 months', 'Lifetime']
 INTERVALS = ['1h', '4h', '12h', '1d']
-
+openai.api_key = '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'
 
 class BinanceAPI:
 
@@ -208,7 +209,3 @@ def news():
         return render_template('news.html', articles=articles, user=current_user)
 
 
-@views.route('/trading', methods=['GET'])
-@login_required
-def trading():
-    return render_template('trading.html', user=current_user)
