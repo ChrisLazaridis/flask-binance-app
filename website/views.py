@@ -208,4 +208,20 @@ def news():
         articles = data['articles']
         return render_template('news.html', articles=articles, user=current_user)
 
+@views.route('/trading', methods=['GET'])
+@login_required
+def trading():
+    response = openai.Completion.create(
+        engine='gpt-3.5-turbo',  # Choose the appropriate OpenAI engine
+        prompt='What are the best trading strategies for the day?',
+        max_tokens=100,
+        n=3,  # Number of strategies to retrieve
+        stop=None,
+        temperature=0.7
+    )
 
+    # Extract the strategies from the API response
+    strategies = [choice['text'].strip() for choice in response.choices]
+
+    # Render the trading.html template with the strategies
+    return render_template('trading.html', user=current_user, strategies=strategies)
