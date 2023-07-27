@@ -5,7 +5,7 @@
 {% block content %}
   <div class="container">
     <h1>Suggestion Form</h1>
-    <form id="suggestionForm"  method = 'POST'>
+    <form id="suggestionForm" method="POST">
       <div class="form-group">
         <label for="suggestion">Your Suggestion:</label>
         <textarea class="form-control" name="suggestion" id="suggestion" rows="5" cols="40" required></textarea>
@@ -14,4 +14,29 @@
       <p id="responseMessage"></p>
     </form>
   </div>
+  <script>
+  // Function to set the timeout and handle the form submission
+  function handleSubmit(event) {
+    event.preventDefault();
+    const submitBtn = document.getElementById("submitBtn");
+    const responseMessage = document.getElementById("responseMessage");
+    const lastSubmissionTime = sessionStorage.getItem("lastSubmissionTime");
+
+    if (!lastSubmissionTime || new Date() - new Date(lastSubmissionTime) >= 2 * 60 * 60 * 1000) {
+      // Allow submission if 2 hours have passed since the last submission
+      sessionStorage.setItem("lastSubmissionTime", new Date().toString());
+      responseMessage.textContent = "";
+      event.target.submit();
+    } else {
+      // Display a message if the cooldown period is not over yet
+      const remainingTime = Math.ceil((2 * 60 * 60 * 1000 - (new Date() - new Date(lastSubmissionTime))) / 1000);
+      responseMessage.textContent = `Please wait before submitting your next suggestion. You can submit in ${remainingTime} seconds.`;
+      responseMessage.style.color = "red";
+    }
+  }
+
+  // Add an event listener to the form on submit
+  const suggestionForm = document.getElementById("suggestionForm");
+  suggestionForm.addEventListener("submit", handleSubmit);
+</script>
 {% endblock %}
