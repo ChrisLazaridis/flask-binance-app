@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
+from sqlalchemy import func
+
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
@@ -52,7 +54,7 @@ def sign_up():
         elif len(binance_key) < 12:
             flash('please enter a valid Binance API Authenticator Key')
         else:
-            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='sha256'), key=binance_key, secret_key = binance_secret)
+            new_user = User(email=email, first_name=first_name, password=generate_password_hash(password1, method='sha256'), key=binance_key, secret_key = binance_secret, time_created=func.now(), time_updated=func.now())
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
@@ -71,6 +73,7 @@ def edit_account():
 
         user = User.query.filter_by(email = current_user.email).first()
         if check_password_hash(user.password, passwordc):
+            changed = 0
             if new_password1:
                 if new_password1 != new_password2:
                     flash("the two passwords don't match", category='error')
@@ -78,15 +81,21 @@ def edit_account():
                     flash('password must be at least 8 characters', category='error')
                 else:
                     current_user.password = generate_password_hash ( new_password1, method='sha256' )
+                    changed += 1
                     flash('password changes successfully', category= 'success')
             if new_binance_key:
                 if len(new_binance_key) > 12:
                     current_user.key = new_binance_key
+                    changed += 1
                     flash('binance API key changed successfully', category='success')
             if new_binance_secret :
                 if len(new_binance_secret) > 12:
                     current_user.secret_key = new_binance_secret
+                    changed += 1
                     flash ( 'binance API secret key changed successfully' , category = 'success' )
+        if changed > 0:
+            current_user.time_updated = func.now()
+            db.session.commit()
         else:
             flash('the password you entered is not correct', category = 'error')
 

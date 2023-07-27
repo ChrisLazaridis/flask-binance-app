@@ -3,6 +3,9 @@ import datetime
 import pytz
 import requests
 import openai
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
 from flask import Blueprint, render_template, request, flash, redirect, url_for
@@ -11,6 +14,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from .models import User
+
 views = Blueprint('views', __name__)
 
 SYMBOLS = ['BTC', 'ETH', 'ADA', 'XRP', 'BNB', 'LTC', 'BCH', 'EOS', 'XLM', 'TRX', 'LINK', 'DOT', 'UNI', 'DOGE', 'ATOM',
@@ -18,9 +22,6 @@ SYMBOLS = ['BTC', 'ETH', 'ADA', 'XRP', 'BNB', 'LTC', 'BCH', 'EOS', 'XLM', 'TRX',
 DURATION_OPTIONS = ['1 month', '3 months', '6 months', '9 months', '12 months', 'Lifetime']
 INTERVALS = ['1h', '4h', '12h', '1d']
 openai.api_key = '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'
-user_total_usage = {}
-user_shown_form = {}
-user_last_access = {}
 
 
 class BinanceAPI:
@@ -199,25 +200,7 @@ def equity():
 
 @views.route('/', methods=['GET'])
 def home():
-    user_id = current_user.id
-
-    if user_id:
-        if user_id not in user_shown_form or not user_shown_form[user_id]:
-            time_elapsed = update_user_usage(user_id)
-
-            if time_elapsed.total_seconds() >= 3600:
-                user_shown_form[user_id] = True
-                return render_template('suggestion_form.html, user=current_user')
-
     return render_template('home.html', user=current_user)
-
-
-def update_user_usage(user_id):
-    current_time = datetime.datetime.now()
-    last_access_time = user_last_access.get(user_id, current_time)
-    time_elapsed = current_time - last_access_time
-    user_last_access[user_id] = current_time
-    return time_elapsed
 
 
 @views.route('/news', methods=['GET'])
@@ -231,40 +214,35 @@ def news():
         return render_template('news.html', articles=articles, user=current_user)
 
 
-@views.route('/submit_suggestion', methods=['POST'])
+@views.route('/suggestions', methods=['GET', 'POST'])
 @login_required
-def submit_suggestion():
-    # Retrieve the form data
-    suggestion = request.form['suggestion']
+def suggestions():
+    if request.method == 'GET':
+        return render_template('suggestion_form.html', user=current_user)
+    if request.method == 'POST':
+        suggestion = request.form.get('suggestion')
+        if suggestion:
+            saved = save_suggestion_to_file(current_user.email, suggestion)
+            if saved:
+                flash('Thank you for your suggestion!', category='success')
+                return redirect(url_for('views.manager'))
+            else:
+                flash('Something went wrong. Please try again later.', category='error')
+                return render_template('suggestion_form.html', user=current_user)
+        else:
+            flash('Please enter a suggestion', category='error')
+            return render_template('suggestion_form.html', user=current_user)
 
-    # Get the user's ID (replace this with your actual login mechanism)
-    user_id = current_user.id
 
-    # Send the suggestion to your email
-    send_email(suggestion, user_id)
+def save_suggestion_to_file(user_email, suggestion):
+    filename = 'suggestions.txt'
 
-    # Redirect the user to a thank you page or the main page
-    return render_template('thank_you.html', user=current_user)
+    formatted_suggestion = f"User Email: {user_email}\nSuggestion: {suggestion}\n\n"
 
-
-def send_email(suggestion, user_id):
-    # Set up email parameters
-    sender_email = current_user.email
-    receiver_email = 'clazaridis7@gmail.com'
-    subject = 'binance flask app suggestion form'
-
-    # Create the email message
-    message = MIMEMultipart()
-    message['From'] = sender_email
-    message['To'] = receiver_email
-    message['Subject'] = subject
-
-    # Attach the suggestion and user ID to the email
-    body = f"User ID: {user_id}\n\nSuggestion: {suggestion}"
-    message.attach(MIMEText(body, 'plain'))
-
-    # Connect to the SMTP server and send the email
-    with smtplib.SMTP('smtp.example.com', 587) as server:
-        server.starttls()
-        server.login(sender_email, 'your_email_password')
-        server.send_message(message)
+    try:
+        with open(filename, 'a') as file:
+            file.write(formatted_suggestion)
+    except Exception as e:
+        print(f"An error occurred while saving the suggestion: {e}")
+        return False
+    return True

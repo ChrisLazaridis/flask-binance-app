@@ -113,6 +113,26 @@
         .custom-button-signup:hover {
             background-color: darkgreen;
         }
+        .custom-button-every{
+            background-color: #343a40;
+            color: white;
+
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .custom-button-every:hover{
+            background-color: #2c3e50;
+        }
+        .custom-button-suggest{
+            background-color: green;
+            color: white;
+
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .custom-button-suggest:hover{
+            background-color:darkgreen;
+        }
 
 </style>
 
@@ -132,14 +152,14 @@
       <div class="collapse navbar-collapse" id="navbar">
   <div class="navbar-nav mr-auto">
     {% if user.is_authenticated %}
-      <a class="nav-item nav-link" id="home" href="/manager">
+      <a class="nav-item nav-link custom-button-every" id="home" href="/manager">
           <span class="symbol">📈</span> Manager
       </a>
-      <a class="nav-link nav-item" id="equity" href="/equity">
+      <a class="nav-link nav-item custom-button-every" id="equity" href="/equity">
         <span class="symbol">💰</span> Equity
       </a>
     {% endif %}
-      <a class="nav-item nav-link" id="about" href="/news">
+      <a class="nav-item nav-link custom-button-every" id="about" href="/news">
         <span class="symbol">📰</span> News
       </a>
   </div>
@@ -151,9 +171,10 @@
   </div>
   {% if user.is_authenticated %}
   <div class="navbar-nav">
+    <a class="nav-item nav-link custom-button-suggest" id="suggest" href="/suggestions">Help Us Improve</a>
     <a class="nav-item nav-link custom-button-login" id="editAccInfo" href="/edit-account">Edit Information</a>
     <a class="nav-item nav-link custom-button-logout" id="logout" href="/logout">Logout</a>
-  </div>
+    </div>
   {% endif %}
   {% if not user.is_authenticated %}
     <div class="navbar-nav">
@@ -161,7 +182,7 @@
     <a class="nav-item nav-link custom-button-signup" id="signUp" href="/sign-up">Sign Up</a>
     </div>
   {% endif %}
-</div>
+  </div>
     </nav>
 
     {% with messages = get_flashed_messages(with_categories=true) %} {% if

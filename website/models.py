@@ -8,4 +8,6 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     key = db.Column(db.String(150))
     secret_key = db.Column(db.String(150))
+    time_created = db.Column(db.DateTime(timezone=True), default=func.now())
+    time_updated = db.Column(db.DateTime(timezone=True), default=func.now())
 
