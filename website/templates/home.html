@@ -2,14 +2,18 @@
 {% block title %}Welcome{% endblock %}
 {% block content %}
     <div class="container container-fluid">
-    <h4 class="text-center">Hello and Welcome to my Binance trading analyzer!</h4>
-    <p class="lead text-left">This is an application created by one person so excuse any bugs that might appear. </p>
-    <p class="text-left"> Before we continue you should know that in order to use my application you will need to provide me with an binance API key and an binance API secret key.</p>
-    <p class="text-left blockquote text-danger">You should find enough documentation online on how to create a binance API key, what I am gonna suggest though for safety reasons, restrict every option other than reading!</p>
-    <p class="text-left"> it should look like this!</p>
-    <img class="img-fluid img-rounded" src="info_picture.gif" >
-    <p class="text-left">With this application you can optimize your binance trading experience with graphs and a cumulative overview of your account</p>
-    <p class="text-left">If you have any suggestions/issues feel free to contact me in: clazaridis7@gmail.com</p>
+    <div class=" text-center">
+        <h1>Hello and Welcome to my Binance Trading Companion App!</h1>
+        <p class="lead">This is an application created by one person, so excuse any bugs that might appear.</p>
+        <p>Before we continue, you should know that in order to use my application, you will need to provide me with a Binance API key and an API secret key.</p>
+        <div class="alert alert-danger">
+            <p><strong>Important:</strong> You should find enough documentation online on how to create a Binance API key. For safety reasons, restrict every option other than reading!</p>
+        </div>
+        <p>It should look like this:</p>
+        <img class="img-fluid rounded"  src="{{ url_for('static', filename='info_picture.gif') }}" alt="Info Picture">
+        <p>With this application, you can optimize your Binance trading experience with graphs and a cumulative overview of your account.</p>
+        <p>If you have any suggestions or issues, feel free to contact me at clazaridis7@gmail.com</p>
     </div>
+</div>
 
 {% endblock %}
