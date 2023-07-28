@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00473387-3ac8-42ec-baac-8ce81548e032" name="Changes" comment="27/7/23 (Replaced time triggered suggestion form with a separate suggestions page)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/info_picture.gif" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/website/static/info_picture.gif" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,7 +233,7 @@
       <workItem from="1690359916066" duration="3324000" />
       <workItem from="1690446834225" duration="299000" />
       <workItem from="1690447314392" duration="3312000" />
-      <workItem from="1690530020285" duration="794000" />
+      <workItem from="1690530020285" duration="842000" />
     </task>
     <task id="LOCAL-00001" summary="some changes... still doesn't work">
       <created>1678782694642</created>
@@ -435,7 +433,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690450631512</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="27/7/23 (Replaced time triggered suggestion form with a separate suggestions page)">
+      <option name="closed" value="true" />
+      <created>1690530851872</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1690530851872</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
