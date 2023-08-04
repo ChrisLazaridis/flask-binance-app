@@ -1,18 +1,13 @@
 import datetime
 
+import openai
 import pytz
 import requests
-import openai
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+
 from .models import User
 
 views = Blueprint('views', __name__)
@@ -246,3 +241,45 @@ def save_suggestion_to_file(user_email, suggestion):
         print(f"An error occurred while saving the suggestion: {e}")
         return False
     return True
+
+@views.route('/analysis', methods=['POST','GET'])
+@login_required
+def symbol_analysis():
+    if request.method == 'GET':
+        return render_template('symbol_analysis.html', user=current_user)
+    if request.method == 'POST':
+        symbol = request.form.get('symbol')
+        symbol = symbol.upper()
+        symbol = symbol + 'USDT'
+        url = 'https://api.binance.com/api/v1/klines'
+
+        # Use Binance API to get historical data
+        # Replace 'interval' and 'limit' with appropriate values for your needs
+        params = {
+            'symbol': symbol,
+            'interval': '1d',  # Daily interval, you can choose other intervals like '1h', '1w', etc.
+            'limit': 365,  # Limiting data points to 365 for the last year
+        }
+
+        response = requests.get(url, params=params)
+
+        if response.status_code == 200:
+            data = response.json()
+            # Process the data and prepare the necessary information for the template
+            timestamps = [entry[0] for entry in data]
+            open_prices = [float(entry[1]) for entry in data]
+            high_prices = [float(entry[2]) for entry in data]
+            low_prices = [float(entry[3]) for entry in data]
+            close_prices = [float(entry[4]) for entry in data]
+            volumes = [float(entry[5]) for entry in data]
+
+            return render_template('historical.html', user=current_user, timestamps=timestamps,
+                                    open_prices=open_prices, high_prices=high_prices, low_prices=low_prices,
+                                    close_prices=close_prices, volumes=volumes, symbol=symbol)
+
+        else:
+            flash(f'Error: Coin "{symbol}" data not found!', 'error')
+            return render_template('symbol_analysis.html', user=current_user)
+
+
+

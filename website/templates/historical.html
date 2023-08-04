@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Historical Data for {{ symbol }}</h1>
+
+  <table>
+    <tr>
+      <th>Timestamp</th>
+      <th>Open Price</th>
+      <th>High Price</th>
+      <th>Low Price</th>
+      <th>Close Price</th>
+      <th>Volume</th>
+    </tr>
+    {% for i in range(timestamps|length) %}
+    <tr>
+      <td>{{ timestamps[i] }}</td>
+      <td>{{ open_prices[i] }}</td>
+      <td>{{ high_prices[i] }}</td>
+      <td>{{ low_prices[i] }}</td>
+      <td>{{ close_prices[i] }}</td>
+      <td>{{ volumes[i] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+{% endblock %}
