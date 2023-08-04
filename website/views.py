@@ -253,12 +253,10 @@ def symbol_analysis():
         symbol = symbol + 'USDT'
         url = 'https://api.binance.com/api/v1/klines'
 
-        # Use Binance API to get historical data
-        # Replace 'interval' and 'limit' with appropriate values for your needs
         params = {
             'symbol': symbol,
-            'interval': '1d',  # Daily interval, you can choose other intervals like '1h', '1w', etc.
-            'limit': 365,  # Limiting data points to 365 for the last year
+            'interval': '1w',
+            'limit': 365,
         }
 
         response = requests.get(url, params=params)
