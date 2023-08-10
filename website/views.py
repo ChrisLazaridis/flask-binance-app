@@ -278,6 +278,3 @@ def symbol_analysis():
         else:
             flash(f'Error: Coin "{symbol}" data not found!', 'error')
             return render_template('symbol_analysis.html', user=current_user)
-
-
-
