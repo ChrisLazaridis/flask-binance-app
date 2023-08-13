@@ -13,4 +13,11 @@
     <orderEntry type="library" name="jquery-3.2.1.slim" level="application" />
     <orderEntry type="library" name="popper.js" level="application" />
   </component>
+  <component name="TemplatesService">
+    <option name="TEMPLATE_FOLDERS">
+      <list>
+        <option value="$MODULE_DIR$/website/templates" />
+      </list>
+    </option>
+  </component>
 </module>
