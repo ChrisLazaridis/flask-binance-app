@@ -53,7 +53,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // Extract data from the HTML table
+
       const table = document.getElementById("historicalData");
       if (table) {
         const data = [];
@@ -76,7 +76,7 @@
           });
         }
 
-        // Calculate fluctuations and other stats
+
         const timestamps = data.map((item) => item.timestamp);
         const fluctuations = data.map((item) => item.high - item.low);
         const openPrices = data.map((item) => item.open);
@@ -85,7 +85,7 @@
         const closePrices = data.map((item) => item.close);
         const volumes = data.map((item) => item.volume);
 
-        // Create the main chart using Chart.js library
+
         const mainCtx = document.getElementById("mainChart").getContext("2d");
         new Chart(mainCtx, {
           type: "line",
@@ -166,10 +166,10 @@
           },
         });
 
-        // Create the volume chart using Chart.js library
+
         const volumeCtx = document.getElementById("volumeChart").getContext("2d");
         new Chart(volumeCtx, {
-          type: "bar", // Use a bar chart for volumes
+          type: "bar",
           data: {
             labels: timestamps,
             datasets: [
