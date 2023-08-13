@@ -250,11 +250,11 @@ def symbol_analysis():
     if request.method == 'POST':
         symbol = request.form.get('symbol')
         symbol = symbol.upper()
-        symbol = symbol + 'USDT'
+        symbol_paired = symbol + 'USDT'
         url = 'https://api.binance.com/api/v1/klines'
 
         params = {
-            'symbol': symbol,
+            'symbol': symbol_paired,
             'interval': '1w',
             'limit': 365,
         }

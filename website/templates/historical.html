@@ -23,45 +23,60 @@
     {% endfor %}
   </table>
 
-  <div id="fluctuationChartContainer" style="height: 100vh;">
-    <canvas id="fluctuationChart"></canvas>
+  <!-- Main chart container -->
+  <div id="mainChartContainer"  style="height: 600px;">
+    <canvas id="mainChart"></canvas>
+  </div>
+
+  <!-- Volume chart container -->
+  <div id="volumeChartContainer" style="height: 150px;">
+    <canvas id="volumeChart"></canvas>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
   <script>
-    // Extract data from the HTML table
-    const table = document.getElementById("historicalData");
-    const data = [];
-    for (let i = 1; i < table.rows.length; i++) {
-      const row = table.rows[i];
-      data.push({
-        timestamp: row.cells[0].textContent,
-        open: parseFloat(row.cells[1].textContent),
-        high: parseFloat(row.cells[2].textContent),
-        low: parseFloat(row.cells[3].textContent),
-        close: parseFloat(row.cells[4].textContent),
-        volume: parseFloat(row.cells[5].textContent),
-      });
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+      // Extract data from the HTML table
+      const table = document.getElementById("historicalData");
+      if (table) {
+        const data = [];
+        for (let i = 1; i < table.rows.length; i++) {
+          const row = table.rows[i];
+          const timestamp = row.cells[0].textContent;
+          const open = parseFloat(row.cells[1].textContent);
+          const high = parseFloat(row.cells[2].textContent);
+          const low = parseFloat(row.cells[3].textContent);
+          const close = parseFloat(row.cells[4].textContent);
+          const volume = parseFloat(row.cells[5].textContent);
 
-    // Calculate fluctuations and other stats
-    const timestamps = data.map((item) => item.timestamp);
-    const fluctuations = data.map((item) => item.high - item.low);
-    const openPrices = data.map((item) => item.open);
-    const highPrices = data.map((item) => item.high);
-    const lowPrices = data.map((item) => item.low);
-    const closePrices = data.map((item) => item.close);
-    const volumes = data.map((item) => item.volume);
+          data.push({
+            timestamp: timestamp,
+            open: isNaN(open) ? 0 : open,
+            high: isNaN(high) ? 0 : high,
+            low: isNaN(low) ? 0 : low,
+            close: isNaN(close) ? 0 : close,
+            volume: isNaN(volume) ? 0 : volume,
+          });
+        }
 
-    // Create a chart using Chart.js library
-    const ctx = document.getElementById("fluctuationChart").getContext("2d");
-    new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: timestamps,
-        datasets: [
-          {
+        // Calculate fluctuations and other stats
+        const timestamps = data.map((item) => item.timestamp);
+        const fluctuations = data.map((item) => item.high - item.low);
+        const openPrices = data.map((item) => item.open);
+        const highPrices = data.map((item) => item.high);
+        const lowPrices = data.map((item) => item.low);
+        const closePrices = data.map((item) => item.close);
+        const volumes = data.map((item) => item.volume);
+
+        // Create the main chart using Chart.js library
+        const mainCtx = document.getElementById("mainChart").getContext("2d");
+        new Chart(mainCtx, {
+          type: "line",
+          data: {
+            labels: timestamps,
+            datasets: [
+             {
             label: "Fluctuations",
             data: fluctuations,
             borderColor: "rgba(75, 192, 192, 1)",
@@ -95,50 +110,84 @@
             borderColor: "rgba(153, 102, 255, 1)",
             borderWidth: 2,
             fill: false,
+          }
+            ],
           },
-          {
-            label: "Volume",
-            data: volumes,
-            borderColor: "rgba(255, 159, 64, 1)",
-            borderWidth: 2,
-            fill: false,
-          },
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          zoom: {
-            zoom: {
-              wheel: {
-                enabled: true,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              zoom: {
+                zoom: {
+                  wheel: {
+                    enabled: true,
+                  },
+                  pinch: {
+                    enabled: true,
+                  },
+                  mode: 'xy',
+                }
               },
-              pinch: {
-                enabled: true,
+              title: {
+                display: true,
+                text: "Historical Data",
               },
-              mode: 'xy',
-            }
-          },
-          title: {
-            display: true,
-            text: "Historical Data",
-          },
-          x: {
-            title: {
-              display: true,
-              text: "Timestamp",
+              x: {
+                display: true,
+                title: {
+                  display: true,
+                  text: "Timestamp",
+                },
+              },
+              y: {
+                display: true,
+                title: {
+                  display: true,
+                  text: "Values",
+                },
+              },
             },
           },
-          y: {
-            title: {
-              display: true,
-              text: "Values",
+        });
+
+        // Create the volume chart using Chart.js library
+        const volumeCtx = document.getElementById("volumeChart").getContext("2d");
+        new Chart(volumeCtx, {
+          type: "bar", // Use a bar chart for volumes
+          data: {
+            labels: timestamps,
+            datasets: [
+              {
+                label: "Volume",
+                data: volumes,
+                backgroundColor: "rgba(255, 159, 64, 0.6)",
+                borderColor: "rgba(255, 159, 64, 1)",
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                display: true,
+                title: {
+                  display: true,
+                  text: "Timestamp"
+                }
+              },
+              y: {
+                display: true,
+                title: {
+                  display: true,
+                  text: "Volume",
+                },
+              },
             },
           },
-        },
-      },
+        });
+      }
     });
   </script>
-
 {% endblock %}
