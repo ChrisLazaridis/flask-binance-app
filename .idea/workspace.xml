@@ -252,7 +252,7 @@
       <workItem from="1691941807698" duration="4756000" />
       <workItem from="1692022176537" duration="649000" />
       <workItem from="1692191840414" duration="509000" />
-      <workItem from="1692192521274" duration="1698000" />
+      <workItem from="1692192521274" duration="1980000" />
     </task>
     <task id="LOCAL-00001" summary="some changes... still doesn't work">
       <created>1678782694642</created>
@@ -524,7 +524,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692192821378</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="16/08/2023">
+      <option name="closed" value="true" />
+      <created>1692194368626</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1692194368626</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -580,6 +588,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/flaskProject$Flask_app.coverage" NAME="Flask app Coverage Results" MODIFIED="1679840406487" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/website" />
     <SUITE FILE_PATH="coverage/flaskProject$flaskProject.coverage" NAME="flaskProject Coverage Results" MODIFIED="1678705789461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/flask_binance_app$Flask_app.coverage" NAME="Flask app Coverage Results" MODIFIED="1692194296460" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/website" />
+    <SUITE FILE_PATH="coverage/flask_binance_app$Flask_app.coverage" NAME="Flask app Coverage Results" MODIFIED="1692194505625" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/website" />
   </component>
 </project>

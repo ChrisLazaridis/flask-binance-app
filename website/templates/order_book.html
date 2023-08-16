@@ -22,7 +22,6 @@
     }
 </style>
 
-
 <h1>Real Time Order Book for {{symbol}}</h1>
 <div class="custom-container">
     <div class="table-container">
@@ -40,6 +39,9 @@
             {% endfor %}
         </table>
     </div>
+    <div class="chart-container">
+        <canvas id="orderBookHeatmap"></canvas>
+    </div>
     <div class="table-container">
         <h2>Asks</h2>
         <table id="orderBookAsks" class="custom-table">
@@ -56,11 +58,6 @@
         </table>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <canvas id="orderBookHeatmap"></canvas>
-    </div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -71,7 +68,6 @@
         var bidData = [];
         var askData = [];
 
-        // Extract data from the hidden tables
         for (var i = 0; i < bidsTable.rows.length; i++) {
             var price = parseFloat(bidsTable.rows[i].cells[0].textContent);
             var quantity = parseFloat(bidsTable.rows[i].cells[1].textContent);
