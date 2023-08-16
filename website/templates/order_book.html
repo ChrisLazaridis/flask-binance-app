@@ -2,10 +2,11 @@
 {% block title %} Order Book {% endblock %}
 {% block content %}
 <style>
-    .custom-container {
+    .custom-container{
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
-        align-items: flex-start;
+        height: 90%;
     }
     .table-container {
         flex: 1;
@@ -23,6 +24,9 @@
 </style>
 
 <h1>Real Time Order Book for {{symbol}}</h1>
+<div class="chart-container">
+    <canvas id="orderBookChart"></canvas>
+</div>
 <div class="custom-container">
     <div class="table-container">
         <h2>Bids</h2>
@@ -38,9 +42,6 @@
             </tr>
             {% endfor %}
         </table>
-    </div>
-    <div class="chart-container">
-        <canvas id="orderBookHeatmap"></canvas>
     </div>
     <div class="table-container">
         <h2>Asks</h2>
@@ -58,6 +59,7 @@
         </table>
     </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -81,7 +83,7 @@
         }
 
         // Create a scatter plot with varying point colors
-        var ctx = document.getElementById("orderBookHeatmap").getContext("2d");
+        var ctx = document.getElementById("orderBookChart").getContext("2d");
         var chart = new Chart(ctx, {
             type: "scatter",
             data: {

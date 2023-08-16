@@ -133,6 +133,15 @@
         .custom-button-suggest:hover{
             background-color:darkgreen;
         }
+        .main-container {
+          position: relative; /* Create a positioning context */
+          padding-bottom: 50px; /* Space for the crypto bar */
+        }
+
+        .content-container {
+          position: relative; /* Create a positioning context */
+          z-index: 1; /* Ensure content appears above the crypto bar */
+        }
 
 </style>
 
@@ -205,10 +214,14 @@
       </button>
     </div>
     {% endif %} {% endfor %} {% endif %} {% endwith %}
-    <div class="container">{% block content %} {% endblock %}</div>
+    <div class="container main-container">
+    <div class="content-container">
+        {% block content %} {% endblock %}
+    </div>
     <div id="crypto-bar" class="bottom-bar">
         <div id="crypto-prices" class="flex-container"></div>
     </div>
+</div>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
