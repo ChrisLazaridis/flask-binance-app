@@ -1,29 +1,122 @@
 {% extends "base.html" %}
 {% block title %} Order Book {% endblock %}
 {% block content %}
+<style>
+    .custom-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .table-container {
+        flex: 1;
+        padding: 20px;
+    }
+    .custom-table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    .custom-table th, .custom-table td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+    }
+</style>
+
+
 <h1>Real Time Order Book for {{symbol}}</h1>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <table id="orderBookBids" hidden>
-                {% for i in range(bids|length) %}
-                <tr>
-                    <td>{{ bids[i][0] }}</td>
-                    <td>{{ bids[i][1] }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
-        <div class="col-md-6">
-            <table id="orderBookAsks" hidden>
-                {% for i in range(asks|length) %}
-                <tr>
-                    <td>{{ asks[i][0] }}</td>
-                    <td>{{ asks[i][1] }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
+<div class="custom-container">
+    <div class="table-container">
+        <h2>Bids</h2>
+        <table id="orderBookBids" class="custom-table">
+            <tr>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+            {% for i in range(bids|length) %}
+            <tr>
+                <td>{{ bids[i][0] }}</td>
+                <td>{{ bids[i][1] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="table-container">
+        <h2>Asks</h2>
+        <table id="orderBookAsks" class="custom-table">
+            <tr>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+            {% for i in range(asks|length) %}
+            <tr>
+                <td>{{ asks[i][0] }}</td>
+                <td>{{ asks[i][1] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-12">
+        <canvas id="orderBookHeatmap"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var bidsTable = document.getElementById("orderBookBids");
+        var asksTable = document.getElementById("orderBookAsks");
+
+        var bidData = [];
+        var askData = [];
+
+        // Extract data from the hidden tables
+        for (var i = 0; i < bidsTable.rows.length; i++) {
+            var price = parseFloat(bidsTable.rows[i].cells[0].textContent);
+            var quantity = parseFloat(bidsTable.rows[i].cells[1].textContent);
+            bidData.push({ x: price, y: quantity });
+        }
+
+        for (var i = 0; i < asksTable.rows.length; i++) {
+            var price = parseFloat(asksTable.rows[i].cells[0].textContent);
+            var quantity = parseFloat(asksTable.rows[i].cells[1].textContent);
+            askData.push({ x: price, y: quantity });
+        }
+
+        // Create a scatter plot with varying point colors
+        var ctx = document.getElementById("orderBookHeatmap").getContext("2d");
+        var chart = new Chart(ctx, {
+            type: "scatter",
+            data: {
+                datasets: [
+                    {
+                        data: bidData,
+                        label: "Bids",
+                        backgroundColor: "rgba(75, 192, 192, 0.8)",
+                        borderColor: "rgba(75, 192, 192, 1)"
+                    },
+                    {
+                        data: askData,
+                        label: "Asks",
+                        backgroundColor: "rgba(255, 99, 132, 0.8)",
+                        borderColor: "rgba(255, 99, 132, 1)"
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: "linear",
+                        position: "bottom"
+                    },
+                    y: {
+                        type: "linear",
+                        position: "left"
+                    }
+                }
+            }
+        });
+    });
+</script>
 {% endblock %}
