@@ -159,6 +159,8 @@
      <a class="nav-item nav-link custom-button-every" id="analysis" href="/analysis">
         <span class="symbol">📊 </span> Historical Analysis
       </a>
+        <a class="nav-item nav-link custom-button-every" id="stats" href="/order-book">
+            <span class="symbol">📖</span> Order Book
     {% endif %}
       <a class="nav-item nav-link custom-button-every" id="news" href="/news">
         <span class="symbol">📰</span> News
@@ -224,39 +226,36 @@
       crossorigin="anonymous"
     ></script>
      <script>
-        // Function to fetch and display crypto prices
-        function fetchCryptoPrices() {
-            // Make an API request to fetch crypto prices
-            fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=12&page=1')
-            .then(response => response.json())
-            .then(data => {
-                    // Extract the necessary data from the API response
-                    const prices = data.map(coin => ({
-                    name: coin.name,
-                    price: coin.current_price
-                }));
+    // Function to fetch and display crypto prices
+    function fetchCryptoPrices() {
+        // Make an API request to fetch crypto prices from CoinCap
+        fetch('https://api.coincap.io/v2/assets?limit=12')
+        .then(response => response.json())
+        .then(data => {
+                // Extract the necessary data from the API response
+                const prices = data.data.map(coin => ({
+                name: coin.name,
+                price: parseFloat(coin.priceUsd)
+            }));
 
-                // Display the crypto prices in the bar
-                const barElement = document.getElementById('crypto-prices');
-                barElement.innerHTML = ''; // Clear the previous content
+            // Display the crypto prices in the bar
+            const barElement = document.getElementById('crypto-prices');
+            barElement.innerHTML = ''; // Clear the previous content
 
-                prices.forEach(coin => {
-                    const coinElement = document.createElement('span');
-                    coinElement.textContent = `${coin.name}: $${coin.price.toFixed(2)}`;
-                    barElement.appendChild(coinElement);
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching crypto prices:', error);
+            prices.forEach(coin => {
+                const coinElement = document.createElement('span');
+                coinElement.textContent = `${coin.name}: $${coin.price.toFixed(2)}`;
+                barElement.appendChild(coinElement);
             });
-        }
+        })
+        .catch(error => {
+            console.error('Error fetching crypto prices:', error);
+        });
+    }
 
-        // Fetch crypto prices on page load
-        document.addEventListener('DOMContentLoaded', fetchCryptoPrices);
-
-        // Fetch crypto prices every minute
-        setInterval(fetchCryptoPrices, 60000);
-     </script>
+    // Fetch crypto prices on page load
+    document.addEventListener('DOMContentLoaded', fetchCryptoPrices);
+ </script>
 
 {% block javascript %}
     <script type="text/javascript">

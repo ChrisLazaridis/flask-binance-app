@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %} Order Book {% endblock %}
+{% block content %}
+<h1>Real Time Order Book for {{symbol}}</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <table id="orderBookBids" hidden>
+                {% for i in range(bids|length) %}
+                <tr>
+                    <td>{{ bids[i][0] }}</td>
+                    <td>{{ bids[i][1] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table id="orderBookAsks" hidden>
+                {% for i in range(asks|length) %}
+                <tr>
+                    <td>{{ asks[i][0] }}</td>
+                    <td>{{ asks[i][1] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

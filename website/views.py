@@ -278,3 +278,28 @@ def symbol_analysis():
         else:
             flash(f'Error: Coin "{symbol}" data not found!', 'error')
             return render_template('symbol_analysis.html', user=current_user)
+@views.route('/order-book', methods=['GET','POST'])
+@login_required
+def order_book():
+    if request.method == 'GET':
+        return render_template('symbol_analysis.html', user=current_user)
+    if request.method == 'POST':
+        symbol = request.form.get('symbol')
+        symbol = symbol.upper()
+        symbol_paired = symbol + 'USDT'
+        url = f"https://api.binance.com/api/v3/depth?symbol={symbol_paired}&limit=100"
+
+        try:
+            response = requests.get(url)
+            data = response.json()
+
+            bids = data.get('bids', [])
+            asks = data.get('asks', [])
+
+            return render_template('order_book.html', symbol=symbol, bids=bids, asks=asks, user=current_user)
+        except Exception as e:
+            error_message = f"An error occurred: {str(e)}"
+            print(error_message)
+            flash("something went wrong", 'error')
+            return render_template('symbol_analysis.html', user=current_user)
+
