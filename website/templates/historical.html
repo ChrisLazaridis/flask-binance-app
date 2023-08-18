@@ -56,15 +56,15 @@
 
       const table = document.getElementById("historicalData");
       if (table) {
-        const data = [];
+        let data = [];
         for (let i = 1; i < table.rows.length; i++) {
-          const row = table.rows[i];
-          const timestamp = row.cells[0].textContent;
-          const open = parseFloat(row.cells[1].textContent);
-          const high = parseFloat(row.cells[2].textContent);
-          const low = parseFloat(row.cells[3].textContent);
-          const close = parseFloat(row.cells[4].textContent);
-          const volume = parseFloat(row.cells[5].textContent);
+          let row = table.rows[i];
+          let timestamp = row.cells[0].textContent;
+          let open = parseFloat(row.cells[1].textContent);
+          let high = parseFloat(row.cells[2].textContent);
+          let low = parseFloat(row.cells[3].textContent);
+          let close = parseFloat(row.cells[4].textContent);
+          let volume = parseFloat(row.cells[5].textContent);
 
           data.push({
             timestamp: timestamp,

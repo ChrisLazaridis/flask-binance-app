@@ -69,7 +69,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-      let winLossChart = new Chart(document.getElementById("win-loss-chart"), {
+      const winLossChart = new Chart(document.getElementById("win-loss-chart"), {
         type: 'pie',
         data: {
           labels: ["Wins", "Losses"],

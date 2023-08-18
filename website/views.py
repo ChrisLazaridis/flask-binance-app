@@ -165,18 +165,13 @@ def manager():
 @views.route('/equity', methods=['GET', 'POST'])
 @login_required
 def equity():
-    # Retrieve the user's Binance API credentials from the database
     user = User.query.filter_by(email=current_user.email).first()
     api_key = user.key
     secret_key = user.secret_key
 
-    # Create a Binance client using the API credentials
     client = Client(api_key, secret_key)
 
-    # Retrieve the user's Binance wallet balances
     balances = client.get_account()['balances']
-
-    # Filter out balances with zero balance and no usd value
     balances = [b for b in balances if float(b['free']) + float(b['locked']) > 0 and b['asset'] != 'USDT']
     for b in balances:
         symbol = b['asset'] + 'USDT'
@@ -242,7 +237,8 @@ def save_suggestion_to_file(user_email, suggestion):
         return False
     return True
 
-@views.route('/analysis', methods=['POST','GET'])
+
+@views.route('/analysis', methods=['POST', 'GET'])
 @login_required
 def symbol_analysis():
     if request.method == 'GET':
@@ -259,11 +255,10 @@ def symbol_analysis():
             'limit': 365,
         }
 
-        response = requests.get(url, params=params)
-
-        if response.status_code == 200:
+        try:
+            response = requests.get(url, params=params)
+            response.raise_for_status()
             data = response.json()
-            # Process the data and prepare the necessary information for the template
             timestamps = [entry[0] for entry in data]
             open_prices = [float(entry[1]) for entry in data]
             high_prices = [float(entry[2]) for entry in data]
@@ -272,13 +267,16 @@ def symbol_analysis():
             volumes = [float(entry[5]) for entry in data]
 
             return render_template('historical.html', user=current_user, timestamps=timestamps,
-                                    open_prices=open_prices, high_prices=high_prices, low_prices=low_prices,
-                                    close_prices=close_prices, volumes=volumes, symbol=symbol)
+                                   open_prices=open_prices, high_prices=high_prices, low_prices=low_prices,
+                                   close_prices=close_prices, volumes=volumes, symbol=symbol)
 
-        else:
-            flash(f'Error: Coin "{symbol}" data not found!', 'error')
+        except requests.exceptions.RequestException as e:
+            print(f"An error occurred: {str(e)}")
+            flash("An error occurred, please try again and check the validity of the symbol you entered.", 'error')
             return render_template('symbol_analysis.html', user=current_user)
-@views.route('/order-book', methods=['GET','POST'])
+
+
+@views.route('/order-book', methods=['GET', 'POST'])
 @login_required
 def order_book():
     if request.method == 'GET':
@@ -287,19 +285,24 @@ def order_book():
         symbol = request.form.get('symbol')
         symbol = symbol.upper()
         symbol_paired = symbol + 'USDT'
-        url = f"https://api.binance.com/api/v3/depth?symbol={symbol_paired}&limit=100"
+        url = f"https://api.binance.com/api/v3/depth?symbol={symbol_paired}&limit=200"
 
         try:
             response = requests.get(url)
+            response.raise_for_status()
             data = response.json()
 
             bids = data.get('bids', [])
             asks = data.get('asks', [])
 
             return render_template('order_book.html', symbol=symbol, bids=bids, asks=asks, user=current_user)
-        except Exception as e:
+        except requests.exceptions.RequestException as e:
             error_message = f"An error occurred: {str(e)}"
             print(error_message)
-            flash("something went wrong", 'error')
+            flash("An error occurred, please try again and check the validity of the symbol you entered.", 'error')
             return render_template('symbol_analysis.html', user=current_user)
-
+        except ValueError as e:
+            error_message = f"An error occurred while processing the API response: {str(e)}"
+            print(error_message)
+            flash("An error occurred.", 'error')
+            return render_template('symbol_analysis.html', user=current_user)

@@ -170,6 +170,7 @@
       </a>
         <a class="nav-item nav-link custom-button-every" id="stats" href="/order-book">
             <span class="symbol">📖</span> Order Book
+        </a>
     {% endif %}
       <a class="nav-item nav-link custom-button-every" id="news" href="/news">
         <span class="symbol">📰</span> News
@@ -245,15 +246,13 @@
         fetch('https://api.coincap.io/v2/assets?limit=12')
         .then(response => response.json())
         .then(data => {
-                // Extract the necessary data from the API response
-                const prices = data.data.map(coin => ({
+
+                let prices = data.data.map(coin => ({
                 name: coin.name,
                 price: parseFloat(coin.priceUsd)
             }));
-
-            // Display the crypto prices in the bar
             const barElement = document.getElementById('crypto-prices');
-            barElement.innerHTML = ''; // Clear the previous content
+            barElement.innerHTML = '';
 
             prices.forEach(coin => {
                 const coinElement = document.createElement('span');
@@ -265,8 +264,6 @@
             console.error('Error fetching crypto prices:', error);
         });
     }
-
-    // Fetch crypto prices on page load
     document.addEventListener('DOMContentLoaded', fetchCryptoPrices);
  </script>
 
@@ -278,8 +275,6 @@
             let modeSwitch = document.getElementById("modeSwitch");
             let body = document.body;
             let modeSwitchLabel = document.getElementById("modeSwitchLabel");
-
-            // Check if theme preference exists in localStorage
             let darkModePreference = localStorage.getItem("darkModePreference");
             if (darkModePreference === "true") {
                 modeSwitch.checked = true;
@@ -292,9 +287,7 @@
             }
 
             modeSwitch.addEventListener("change", function() {
-                // Update theme preference in localStorage
                 localStorage.setItem("darkModePreference", this.checked);
-                // Update body data-theme attribute
                 if(this.checked) {
                     body.classList.replace("light-theme", "dark-theme");
                     modeSwitchLabel.innerHTML = "Dark Mode";
