@@ -93,7 +93,7 @@ def edit_account():
                     current_user.secret_key = new_binance_secret
                     changed += 1
                     flash ( 'binance API secret key changed successfully' , category = 'success' )
-        if changed > 0:
+        if  changed > 0:
             current_user.time_updated = func.now()
             db.session.commit()
         else:

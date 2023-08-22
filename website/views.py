@@ -251,7 +251,7 @@ def symbol_analysis():
 
         params = {
             'symbol': symbol_paired,
-            'interval': '1w',
+            'interval': '1d',
             'limit': 365,
         }
 
@@ -306,3 +306,4 @@ def order_book():
             print(error_message)
             flash("An error occurred.", 'error')
             return render_template('symbol_analysis.html', user=current_user)
+

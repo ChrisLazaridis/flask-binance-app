@@ -134,13 +134,13 @@
             background-color:darkgreen;
         }
         .main-container {
-          position: relative; /* Create a positioning context */
-          padding-bottom: 50px; /* Space for the crypto bar */
+          position: relative;
+          padding-bottom: 50px; /
         }
 
         .content-container {
-          position: relative; /* Create a positioning context */
-          z-index: 1; /* Ensure content appears above the crypto bar */
+          position: relative;
+          z-index: 1;
         }
 
 </style>
@@ -148,55 +148,46 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbar"
-      >
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar">
-  <div class="navbar-nav mr-auto">
-    {% if user.is_authenticated %}
-      <a class="nav-item nav-link custom-button-every" id="home" href="/manager">
-          <span class="symbol">📈</span> Manager
-      </a>
-      <a class="nav-link nav-item custom-button-every" id="equity" href="/equity">
-        <span class="symbol">💰</span> Equity
-      </a>
-     <a class="nav-item nav-link custom-button-every" id="analysis" href="/analysis">
-        <span class="symbol">📊 </span> Historical Analysis
-      </a>
-        <a class="nav-item nav-link custom-button-every" id="stats" href="/order-book">
-            <span class="symbol">📖</span> Order Book
-        </a>
-    {% endif %}
-      <a class="nav-item nav-link custom-button-every" id="news" href="/news">
-        <span class="symbol">📰</span> News
-      </a>
-  </div>
-  <div class="navbar-nav">
-      <div class="nav-item nav-link custom-control custom-switch">
-          <input type="checkbox" class="custom-control-input" id="modeSwitch" checked>
-          <label id="modeSwitchLabel" class="custom-control-label" for="modeSwitch"></label>
-      </div>
-  </div>
-  {% if user.is_authenticated %}
-  <div class="navbar-nav">
-    <a class="nav-item nav-link custom-button-suggest" id="suggest" href="/suggestions">Help Us Improve</a>
-    <a class="nav-item nav-link custom-button-login" id="editAccInfo" href="/edit-account">Edit Information</a>
-    <a class="nav-item nav-link custom-button-logout" id="logout" href="/logout">Logout</a>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+        <div class="navbar-nav mr-auto">
+            {% if user.is_authenticated %}
+                <a class="nav-item nav-link custom-button-every" id="home" href="/manager">
+                    <span class="symbol">📈</span> Manager
+                </a>
+                <a class="nav-link nav-item custom-button-every" id="equity" href="/equity">
+                    <span class="symbol">💰</span> Equity
+                </a>
+                <a class="nav-item nav-link custom-button-every" id="analysis" href="/analysis">
+                    <span class="symbol">📊 </span> Historical Analysis
+                </a>
+                <a class="nav-item nav-link custom-button-every" id="stats" href="/order-book">
+                    <span class="symbol">📖</span> Order Book
+                </a>
+            {% endif %}
+            <a class="nav-item nav-link custom-button-every" id="news" href="/news">
+                <span class="symbol">📰</span> News
+            </a>
+        </div>
+
+            <div class="nav-item nav-link custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="modeSwitch" checked>
+                <label id="modeSwitchLabel" class="custom-control-label" for="modeSwitch"></label>
+            </div>
+            {% if user.is_authenticated %}
+                <a class="nav-item nav-link custom-button-suggest" id="suggest" href="/suggestions">Help Us Improve</a>
+                <a class="nav-item nav-link custom-button-login" id="editAccInfo" href="/edit-account">Edit Information</a>
+                <a class="nav-item nav-link custom-button-logout" id="logout" href="/logout">Logout</a>
+            {% else %}
+                <a class="nav-item nav-link custom-button-login" id="login" href="/login">Login</a>
+                <a class="nav-item nav-link custom-button-signup" id="signUp" href="/sign-up">Sign Up</a>
+            {% endif %}
+        </div>
     </div>
-  {% endif %}
-  {% if not user.is_authenticated %}
-    <div class="navbar-nav">
-    <a class="nav-item nav-link custom-button-login" id="login" href="/login">Login</a>
-    <a class="nav-item nav-link custom-button-signup" id="signUp" href="/sign-up">Sign Up</a>
-    </div>
-  {% endif %}
-  </div>
-    </nav>
+</nav>
+
 
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %} {% for category, message in messages %} {% if category ==
