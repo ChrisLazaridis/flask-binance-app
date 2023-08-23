@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
     />
     <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-      crossorigin="anonymous"
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            crossorigin="anonymous"
     />
 
     <title>{% block title %}Home{% endblock %}</title>
@@ -21,10 +21,12 @@
             background-color: #2c3e50;
             color: #f5f5f5;
         }
+
         body.light-theme {
             background-color: #f5f5f5;
             color: #2c3e50;
         }
+
         .bottom-bar {
             background-color: #343a40;
             color: #f5f5f5;
@@ -41,7 +43,7 @@
         }
 
         .flex-container {
-             display: flex;
+            display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
             word-spacing: 5px;
@@ -64,9 +66,11 @@
                 transform: scale(1);
             }
         }
+
         .symbol {
-             margin-right: 5px;
+            margin-right: 5px;
         }
+
         .custom-switch .custom-control-input:checked ~ .custom-control-label::before {
             background-color: #2c3e50;
         }
@@ -78,135 +82,114 @@
         .custom-switch .custom-control-input:focus ~ .custom-control-label::before {
             box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.25);
         }
-         .custom-button-logout {
-            background-color: red;
-            color: white;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
 
-
-        .custom-button-logout:hover {
-            background-color: darkred;
-        }
-        .custom-button-login {
-            background-color: blue;
-            color: white;
-
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .custom-button-signup {
-            background-color: green;
-            color: white;
-
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-
-        .custom-button-login:hover {
-            background-color: darkblue;
-        }
-
-        .custom-button-signup:hover {
-            background-color: darkgreen;
-        }
-        .custom-button-every{
+        .custom-button-every {
             background-color: #343a40;
             color: white;
 
             border-radius: 5px;
             transition: background-color 0.3s;
         }
-        .custom-button-every:hover{
+
+        .custom-button-every:hover {
             background-color: #2c3e50;
         }
-        .custom-button-suggest{
-            background-color: green;
-            color: white;
 
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .custom-button-suggest:hover{
-            background-color:darkgreen;
-        }
         .main-container {
-          position: relative;
-          padding-bottom: 50px; /
+            position: relative;
+            padding-bottom: 50px;
         }
 
         .content-container {
-          position: relative;
-          z-index: 1;
+            position: relative;
+            z-index: 1;
         }
 
-</style>
 
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        body.dark-theme .custom-control-label {
+            color: rgba(255, 255, 255, .5);
+        }
+
+
+        body.light-theme .custom-control-label {
+            color: rgba(255, 255, 255, .5);
+        }
+
+
+    </style>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav mr-auto">
+            <a class="nav-item nav-link navbar-brand" href="/">
+                <i class="fa fa-home" aria-hidden="true"></i> Home
+            </a>
             {% if user.is_authenticated %}
-                <a class="nav-item nav-link custom-button-every" id="home" href="/manager">
-                    <span class="symbol">📈</span> Manager
-                </a>
-                <a class="nav-link nav-item custom-button-every" id="equity" href="/equity">
-                    <span class="symbol">💰</span> Equity
-                </a>
-                <a class="nav-item nav-link custom-button-every" id="analysis" href="/analysis">
-                    <span class="symbol">📊 </span> Historical Analysis
-                </a>
-                <a class="nav-item nav-link custom-button-every" id="stats" href="/order-book">
-                    <span class="symbol">📖</span> Order Book
-                </a>
+            <a class="nav-item nav-link custom-button-every" id="home" href="/manager">
+                <!-- <span class="symbol">📈</span> --> <i class="fa fa-line-chart" aria-hidden="true"></i> Manager
+            </a>
+            <a class="nav-link nav-item custom-button-every" id="equity" href="/equity">
+                <!-- <span class="symbol">💰</span> --> <i class="fa fa-money" aria-hidden="true"></i> Equity
+            </a>
+            <a class="nav-item nav-link custom-button-every" id="analysis" href="/analysis">
+                <!-- <span class="symbol">📊 </span> --> <i class="fa fa-history" aria-hidden="true"></i> Historical
+                Analysis
+            </a>
+            <a class="nav-item nav-link custom-button-every" id="stats" href="/order-book">
+                <!-- <span class="symbol">📖</span> --> <i class="fa fa-book" aria-hidden="true"></i> Order Book
+            </a>
             {% endif %}
             <a class="nav-item nav-link custom-button-every" id="news" href="/news">
-                <span class="symbol">📰</span> News
+                <!-- <span class="symbol">📰</span> --> <i class="fa fa-newspaper-o" aria-hidden="true"></i> News
             </a>
         </div>
 
-            <div class="nav-item nav-link custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="modeSwitch" checked>
-                <label id="modeSwitchLabel" class="custom-control-label" for="modeSwitch"></label>
-            </div>
-            {% if user.is_authenticated %}
-                <a class="nav-item nav-link custom-button-suggest" id="suggest" href="/suggestions">Help Us Improve</a>
-                <a class="nav-item nav-link custom-button-login" id="editAccInfo" href="/edit-account">Edit Information</a>
-                <a class="nav-item nav-link custom-button-logout" id="logout" href="/logout">Logout</a>
-            {% else %}
-                <a class="nav-item nav-link custom-button-login" id="login" href="/login">Login</a>
-                <a class="nav-item nav-link custom-button-signup" id="signUp" href="/sign-up">Sign Up</a>
-            {% endif %}
+        <div class="nav-item nav-link custom-control custom-switch custom-button-every">
+            <input type="checkbox" class="custom-control-input" id="modeSwitch" checked>
+            <label id="modeSwitchLabel" class="custom-control-label" for="modeSwitch"></label>
         </div>
+        {% if user.is_authenticated %}
+        <a class="nav-item nav-link btn btn-primary" id="suggest" href="/suggestions"><i class="fa fa-envelope"
+                                                                                         aria-hidden="true"></i> Help Us
+            Improve</a>
+        <a class="nav-item nav-link btn btn-info" id="editAccInfo" href="/edit-account"> <i class="fa fa-pencil-square"
+                                                                                            aria-hidden="true"></i> Edit
+            Information</a>
+        <a class="nav-item nav-link btn btn-danger" id="logout" href="/logout"><i class="fa fa-sign-out"
+                                                                                  aria-hidden="true"></i> Logout</a>
+        {% else %}
+        <a class="nav-item nav-link btn btn-primary" id="login" href="/login"><i class="fa fa-sign-in"
+                                                                                 aria-hidden="true"></i> Login</a>
+        <a class="nav-item nav-link btn btn-info" id="signUp" href="/sign-up"><i class="fa fa-user-plus"
+                                                                                 aria-hidden="true"></i> Sign Up</a>
+        {% endif %}
     </div>
 </nav>
 
 
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %} {% if category ==
-    'error' %}
-    <div class="alert alert-danger alter-dismissable fade show" role="alert">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
+{% with messages = get_flashed_messages(with_categories=true) %} {% if
+messages %} {% for category, message in messages %} {% if category ==
+'error' %}
+<div class="alert alert-danger alter-dismissable fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% else %}
-    <div class="alert alert-success alter-dismissable fade show" role="alert">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
+    </button>
+</div>
+{% else %}
+<div class="alert alert-success alter-dismissable fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% endif %} {% endfor %} {% endif %} {% endwith %}
-    <div class="container main-container">
+    </button>
+</div>
+{% endif %} {% endfor %} {% endif %} {% endwith %}
+<div class="container main-container">
     <div class="content-container">
         {% block content %} {% endblock %}
     </div>
@@ -214,83 +197,85 @@
         <div id="crypto-prices" class="flex-container"></div>
     </div>
 </div>
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
+<script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"
+></script>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
-     <script>
-    // Function to fetch and display crypto prices
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"
+></script>
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"
+></script>
+<script src="https://kit.fontawesome.com/yourcode.js" crossOrigin="anonymous"></script>
+<script>
     function fetchCryptoPrices() {
-        // Make an API request to fetch crypto prices from CoinCap
+
         fetch('https://api.coincap.io/v2/assets?limit=12')
-        .then(response => response.json())
-        .then(data => {
+            .then(response => response.json())
+            .then(data => {
 
                 let prices = data.data.map(coin => ({
-                name: coin.name,
-                price: parseFloat(coin.priceUsd)
-            }));
-            const barElement = document.getElementById('crypto-prices');
-            barElement.innerHTML = '';
+                    name: coin.name,
+                    price: parseFloat(coin.priceUsd)
+                }));
+                const barElement = document.getElementById('crypto-prices');
+                barElement.innerHTML = '';
 
-            prices.forEach(coin => {
-                const coinElement = document.createElement('span');
-                coinElement.textContent = `${coin.name}: $${coin.price.toFixed(2)}`;
-                barElement.appendChild(coinElement);
+                prices.forEach(coin => {
+                    const coinElement = document.createElement('span');
+                    coinElement.textContent = `${coin.name}: $${coin.price.toFixed(2)}`;
+                    barElement.appendChild(coinElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching crypto prices:', error);
             });
-        })
-        .catch(error => {
-            console.error('Error fetching crypto prices:', error);
-        });
     }
+
     document.addEventListener('DOMContentLoaded', fetchCryptoPrices);
- </script>
+</script>
 
 {% block javascript %}
-    <script type="text/javascript">
-    </script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-            let modeSwitch = document.getElementById("modeSwitch");
-            let body = document.body;
-            let modeSwitchLabel = document.getElementById("modeSwitchLabel");
-            let darkModePreference = localStorage.getItem("darkModePreference");
-            if (darkModePreference === "true") {
-                modeSwitch.checked = true;
-                body.classList.add("dark-theme");
-                modeSwitchLabel.innerHTML = "Dark Mode";
-            } else{
-                modeSwitch.checked = false;
-                body.classList.add("light-theme");
-                modeSwitchLabel.innerHTML = "Light Mode";
+<script type="text/javascript">
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let modeSwitch = document.getElementById("modeSwitch");
+        let body = document.body;
+        let modeSwitchLabel = document.getElementById("modeSwitchLabel");
+        let darkModePreference = localStorage.getItem("darkModePreference");
+        if (darkModePreference === "true") {
+            modeSwitch.checked = true;
+            body.classList.add("dark-theme");
+            modeSwitchLabel.innerHTML = "<i id = \"modeSwitchSymbol\" class=\"fa fa-moon-o\" aria-hidden=\"true\"></i>Dark Mode";
+        } else {
+            modeSwitch.checked = false;
+            body.classList.add("light-theme");
+            modeSwitchLabel.innerHTML = "<i id = \"modeSwitchSymbol\" class=\"fa fa-sun-o\" aria-hidden=\"true\"></i>Light Mode";
+        }
+
+        modeSwitch.addEventListener("change", function () {
+            localStorage.setItem("darkModePreference", this.checked);
+            if (this.checked) {
+                body.classList.replace("light-theme", "dark-theme");
+                modeSwitchLabel.innerHTML = "<i id = \"modeSwitchSymbol\" class=\"fa fa-moon-o\" aria-hidden=\"true\"></i>Dark Mode"
+            } else {
+                body.classList.replace("dark-theme", "light-theme");
+                modeSwitchLabel.innerHTML = "<i id = \"modeSwitchSymbol\" class=\"fa fa-sun-o\" aria-hidden=\"true\"></i>Light Mode";
             }
 
-            modeSwitch.addEventListener("change", function() {
-                localStorage.setItem("darkModePreference", this.checked);
-                if(this.checked) {
-                    body.classList.replace("light-theme", "dark-theme");
-                    modeSwitchLabel.innerHTML = "Dark Mode";
-                } else {
-                    body.classList.replace("dark-theme", "light-theme");
-                    modeSwitchLabel.innerHTML = "Light Mode";
-                }
-
-            });
         });
-    </script>
+    });
+
+</script>
 
 {% endblock %}
-  </body>
+</body>
 </html>

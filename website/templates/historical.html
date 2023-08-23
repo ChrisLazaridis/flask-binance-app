@@ -38,7 +38,6 @@
     {% endfor %}
 </table>
 
-
 <div id="mainChartContainer">
     <canvas id="mainChart"></canvas>
 </div>
@@ -48,13 +47,13 @@
     <canvas id="volumeChart"></canvas>
 </div>
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
 <script>
-
     document.addEventListener("DOMContentLoaded", function () {
         const table = document.getElementById("historicalData");
         if (table) {
