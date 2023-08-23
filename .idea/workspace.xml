@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00473387-3ac8-42ec-baac-8ce81548e032" name="Changes" comment="18/08/2023">
-      <change beforePath="$PROJECT_DIR$/.idea/flask-binance-app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/flask-binance-app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+    <list default="true" id="00473387-3ac8-42ec-baac-8ce81548e032" name="Changes" comment="22/08/2023 (turned line historical chart to candlesticks)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/suggestions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/website/suggestions.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website/templates/historical.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/historical.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,7 +266,9 @@
       <workItem from="1692341530823" duration="43000" />
       <workItem from="1692602417613" duration="4305000" />
       <workItem from="1692610125500" duration="3032000" />
-      <workItem from="1692682528200" duration="5657000" />
+      <workItem from="1692682528200" duration="5676000" />
+      <workItem from="1692703936726" duration="1518000" />
+      <workItem from="1692773216076" duration="5707000" />
     </task>
     <task id="LOCAL-00001" summary="some changes... still doesn't work">
       <created>1678782694642</created>
@@ -572,7 +572,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692341561145</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="22/08/2023 (turned line historical chart to candlesticks)">
+      <option name="closed" value="true" />
+      <created>1692688201442</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1692688201442</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -625,11 +633,12 @@
     <MESSAGE value="16/08/2023" />
     <MESSAGE value="16/08/2023 (added order book)" />
     <MESSAGE value="18/08/2023" />
-    <option name="LAST_COMMIT_MESSAGE" value="18/08/2023" />
+    <MESSAGE value="22/08/2023 (turned line historical chart to candlesticks)" />
+    <option name="LAST_COMMIT_MESSAGE" value="22/08/2023 (turned line historical chart to candlesticks)" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/flaskProject$Flask_app.coverage" NAME="Flask app Coverage Results" MODIFIED="1679840406487" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/website" />
     <SUITE FILE_PATH="coverage/flaskProject$flaskProject.coverage" NAME="flaskProject Coverage Results" MODIFIED="1678705789461" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/flask_binance_app$Flask_app.coverage" NAME="Flask app Coverage Results" MODIFIED="1692688175024" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/website" />
+    <SUITE FILE_PATH="coverage/flask_binance_app$Flask_app.coverage" NAME="Flask app Coverage Results" MODIFIED="1692781595519" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/website" />
   </component>
 </project>

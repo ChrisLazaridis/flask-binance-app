@@ -54,11 +54,11 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
 <script>
+
     document.addEventListener("DOMContentLoaded", function () {
         const table = document.getElementById("historicalData");
         if (table) {
             let data = [];
-            let datav = [];
             for (let i = 1; i < table.rows.length; i++) {
                 let row = table.rows[i];
                 let unixTimestamp = parseFloat(row.cells[0].textContent);
@@ -69,15 +69,6 @@
                 let close = parseFloat(row.cells[4].textContent);
                 let volume = parseFloat(row.cells[5].textContent);
 
-                console.log("Timestamp:", timestamp);
-                console.log("Open:", open);
-                console.log("High:", high);
-                console.log("Low:", low);
-                console.log("Close:", close);
-                console.log("Volume:", volume);
-
-
-
                 data.push({
                     x: timestamp,
                     o: isNaN(open) ? 0 : open,
@@ -87,7 +78,6 @@
                     v: isNaN(volume) ? 0 : volume,
                 });
             }
-
             const mainCtx = document.getElementById("mainChart").getContext("2d");
             new Chart(mainCtx, {
                 type: "candlestick",
@@ -190,6 +180,6 @@
                 },
             });
         }
-    });
+    })
 </script>
 {% endblock %}
