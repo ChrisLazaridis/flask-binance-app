@@ -42,13 +42,12 @@
     <canvas id="mainChart"></canvas>
 </div>
 
-
 <div id="volumeChartContainer">
     <canvas id="volumeChart"></canvas>
 </div>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-financial"></script>
@@ -110,7 +109,17 @@
                                     enabled: true,
                                 },
                                 mode: 'x',
-                            }
+                            },
+                            pan: {
+                                mode: 'x',
+                                enabled: true,
+                                rangeMin: {
+                                    x: null,
+                                },
+                                rangeMax: {
+                                    x: null,
+                                },
+                            },
                         },
                         title: {
                             display: true,
@@ -122,7 +131,6 @@
                                 time: {
                                     unit: 'day',
                                 },
-                                adapter: 'moment',
                                 title: {
                                     display: true,
                                     text: "Timestamp",
@@ -138,6 +146,7 @@
                     },
                 },
             });
+
 
             const volumeCtx = document.getElementById("volumeChart").getContext("2d");
             new Chart(volumeCtx, {

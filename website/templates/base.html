@@ -3,17 +3,18 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-            crossorigin="anonymous"
-    />
-    <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-            crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+          crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit-id.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/regular.min.css"/>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-toggle@2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-toggle@2.2.2/js/bootstrap-toggle.min.js"></script>
+
 
     <title>{% block title %}Home{% endblock %}</title>
     <style>
@@ -28,7 +29,7 @@
         }
 
         .bottom-bar {
-            background-color: #343a40;
+            background-color: rgba(33, 37, 41);
             color: #f5f5f5;
             padding: 9px;
             position: fixed;
@@ -40,6 +41,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        #crypto-prices span {
+            margin-right: 10px;
+            padding: 0 5px;
         }
 
         .flex-container {
@@ -77,10 +83,19 @@
 
         .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
             background-color: #f5f5f5;
+            transform: translateX(26px);
         }
 
         .custom-switch .custom-control-input:focus ~ .custom-control-label::before {
             box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.25);
+        }
+        .custom-switch .custom-control-label::before {
+            left: -34px;
+        }
+        .custom-switch .custom-control-input {
+            position: absolute;
+            clip: rect(0, 0, 0, 0);
+            pointer-events: none;
         }
 
         .custom-button-every {
@@ -121,99 +136,108 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbar">
-        <div class="navbar-nav mr-auto">
-            <a class="nav-item nav-link navbar-brand" href="/">
-                <i class="fa fa-home" aria-hidden="true"></i> Home
-            </a>
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+                <a class="nav-link navbar-brand" href="/">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </li>
             {% if user.is_authenticated %}
-            <a class="nav-item nav-link custom-button-every" id="home" href="/manager">
-                <!-- <span class="symbol">📈</span> --> <i class="fa fa-line-chart" aria-hidden="true"></i> Manager
-            </a>
-            <a class="nav-link nav-item custom-button-every" id="equity" href="/equity">
-                <!-- <span class="symbol">💰</span> --> <i class="fa fa-money" aria-hidden="true"></i> Equity
-            </a>
-            <a class="nav-item nav-link custom-button-every" id="analysis" href="/analysis">
-                <!-- <span class="symbol">📊 </span> --> <i class="fa fa-history" aria-hidden="true"></i> Historical
-                Analysis
-            </a>
-            <a class="nav-item nav-link custom-button-every" id="stats" href="/order-book">
-                <!-- <span class="symbol">📖</span> --> <i class="fa fa-book" aria-hidden="true"></i> Order Book
-            </a>
+            <li class="nav-item">
+                <a class="nav-link" href="/manager">
+                    <i class="fas fa-line-chart"></i> Manager
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/equity">
+                    <i class="fas fa-money-bill"></i> Equity
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/analysis">
+                    <i class="fas fa-history"></i> Historical Analysis
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/order-book">
+                    <i class="fas fa-book"></i> Order Book
+                </a>
+            </li>
             {% endif %}
-            <a class="nav-item nav-link custom-button-every" id="news" href="/news">
-                <!-- <span class="symbol">📰</span> --> <i class="fa fa-newspaper-o" aria-hidden="true"></i> News
-            </a>
-        </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/news">
+                    <i class="fas fa-newspaper"></i> News
+                </a>
+            </li>
+        </ul>
 
-        <div class="nav-item nav-link custom-control custom-switch custom-button-every">
+        <div id="modeSwitchContainer" class="nav-item nav-link custom-control custom-switch btn">
             <input type="checkbox" class="custom-control-input" id="modeSwitch" checked>
             <label id="modeSwitchLabel" class="custom-control-label" for="modeSwitch"></label>
         </div>
         {% if user.is_authenticated %}
-        <a class="nav-item nav-link btn btn-primary" id="suggest" href="/suggestions"><i class="fa fa-envelope"
-                                                                                         aria-hidden="true"></i> Help Us
-            Improve</a>
-        <a class="nav-item nav-link btn btn-info" id="editAccInfo" href="/edit-account"> <i class="fa fa-pencil-square"
-                                                                                            aria-hidden="true"></i> Edit
-            Information</a>
-        <a class="nav-item nav-link btn btn-danger" id="logout" href="/logout"><i class="fa fa-sign-out"
-                                                                                  aria-hidden="true"></i> Logout</a>
+        <a class="btn btn-primary nav-item" id="suggest" href="/suggestions">
+            <i class="fas fa-envelope"></i> Help Us Improve
+        </a>
+        <a class="btn btn-info nav-item" id="editAccInfo" href="/edit-account">
+            <i class="fas fa-pencil-square"></i> Edit Information
+        </a>
+        <a class="btn btn-danger nav-item" id="logout" href="/logout">
+            <i class="fas fa-sign-out"></i> Logout
+        </a>
         {% else %}
-        <a class="nav-item nav-link btn btn-primary" id="login" href="/login"><i class="fa fa-sign-in"
-                                                                                 aria-hidden="true"></i> Login</a>
-        <a class="nav-item nav-link btn btn-info" id="signUp" href="/sign-up"><i class="fa fa-user-plus"
-                                                                                 aria-hidden="true"></i> Sign Up</a>
+        <a class="btn btn-primary nav-item" id="login" href="/login">
+            <i class="fas fa-sign-in"></i> Login
+        </a>
+        <a class="btn btn-info nav-item" id="signUp" href="/sign-up">
+            <i class="fas fa-user-plus"></i> Sign Up
+        </a>
         {% endif %}
     </div>
 </nav>
 
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
 
-{% with messages = get_flashed_messages(with_categories=true) %} {% if
-messages %} {% for category, message in messages %} {% if category ==
-'error' %}
-<div class="alert alert-danger alter-dismissable fade show" role="alert">
-    {{ message }}
-    <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-{% else %}
-<div class="alert alert-success alter-dismissable fade show" role="alert">
-    {{ message }}
-    <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-{% endif %} {% endfor %} {% endif %} {% endwith %}
 <div class="container main-container">
     <div class="content-container">
         {% block content %} {% endblock %}
     </div>
     <div id="crypto-bar" class="bottom-bar">
-        <div id="crypto-prices" class="flex-container"></div>
+        <div id="crypto-prices" class="d-flex"></div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script
         src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"
 ></script>
 
-<script
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"
+        integrity="sha512-TPh2Oxlg1zp+kz3nFA0C5vVC6leG/6mm1z9+mA81MI5eaUVqasPLO8Cuk4gMF4gUfP5etR73rgU/8PNMsSesoQ=="
         crossorigin="anonymous"
-></script>
-<script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"
-></script>
-<script src="https://kit.fontawesome.com/yourcode.js" crossOrigin="anonymous"></script>
+        referrerpolicy="no-referrer">
+</script>
+>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css"></script>
 <script>
     function fetchCryptoPrices() {
 
@@ -249,32 +273,42 @@ messages %} {% for category, message in messages %} {% if category ==
     document.addEventListener("DOMContentLoaded", function () {
         let modeSwitch = document.getElementById("modeSwitch");
         let body = document.body;
+        let modeSwitchContainer = document.getElementById("modeSwitchContainer");
         let modeSwitchLabel = document.getElementById("modeSwitchLabel");
         let darkModePreference = localStorage.getItem("darkModePreference");
         if (darkModePreference === "true") {
             modeSwitch.checked = true;
             body.classList.add("dark-theme");
-            modeSwitchLabel.innerHTML = "<i id = \"modeSwitchSymbol\" class=\"fa fa-moon-o\" aria-hidden=\"true\"></i>Dark Mode";
+            modeSwitchLabel.innerHTML = "Dark Mode";
+            modeSwitchContainer.classList.add("btn-dark");
+            modeSwitchLabel.style.color = "rgba(255, 255, 255, .55)";
         } else {
             modeSwitch.checked = false;
             body.classList.add("light-theme");
-            modeSwitchLabel.innerHTML = "<i id = \"modeSwitchSymbol\" class=\"fa fa-sun-o\" aria-hidden=\"true\"></i>Light Mode";
+            modeSwitchLabel.innerHTML = "Light Mode";
+            modeSwitchContainer.classList.add("btn-light");
+            modeSwitchLabel.style.color = "rgba(0, 0, 0, 1)";
         }
 
         modeSwitch.addEventListener("change", function () {
             localStorage.setItem("darkModePreference", this.checked);
             if (this.checked) {
                 body.classList.replace("light-theme", "dark-theme");
-                modeSwitchLabel.innerHTML = "<i id = \"modeSwitchSymbol\" class=\"fa fa-moon-o\" aria-hidden=\"true\"></i>Dark Mode"
+                modeSwitchLabel.innerHTML = "Dark Mode"
+                modeSwitchContainer.classList.replace("btn-light", "btn-dark");
+                modeSwitchLabel.style.color = "rgba(255, 255, 255, .55)";
             } else {
                 body.classList.replace("dark-theme", "light-theme");
-                modeSwitchLabel.innerHTML = "<i id = \"modeSwitchSymbol\" class=\"fa fa-sun-o\" aria-hidden=\"true\"></i>Light Mode";
+                modeSwitchLabel.innerHTML = "Light Mode";
+                modeSwitchContainer.classList.replace("btn-dark", "btn-light");
+                modeSwitchLabel.style.color = "rgba(0, 0, 0, 1)";
             }
 
         });
     });
 
 </script>
+
 
 {% endblock %}
 </body>
