@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% block title%} Analysis {% endblock%}
 {% block content %}
-    <div class="mt-5 mb-5">
-      <form method="POST">
+<div class="mt-5 mb-5">
+    <form method="POST">
         <div class="form-group row">
             <label for="symbol" class="col-sm-2 col-form-label">Symbol:</label>
             <div class="col-sm-4">
                 <textarea class="form-control" id="symbol" name="symbol" rows="1" placeholder="Symbol"></textarea>
             </div>
-       </div>
-           <div class="col-sm-4">
+        </div>
+        <div class="col-sm-4">
             <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-      </form>
-    </div>
+        </div>
+    </form>
+</div>
 {% endblock %}

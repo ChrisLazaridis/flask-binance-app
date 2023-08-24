@@ -2,38 +2,38 @@
 {% block title %}Manager{% endblock %}
 {% block content %}
 <div class="mt-5 mb-5">
-      <form method="POST">
+    <form method="POST">
         <div class="form-group row">
-          <label for="symbol_pair" class="col-sm-2 col-form-label">Symbol Pair:</label>
+            <label for="symbol_pair" class="col-sm-2 col-form-label">Symbol Pair:</label>
             <div class="col-sm-4">
-              <select class="form-control" id="symbol_pair" name="symbol_pair">
-                <option value="-">-</option>
-                {% for symbol in symbols %}
-                {% for symbol2 in symbols %}
-                  {% if symbol != symbol2 %}
+                <select class="form-control" id="symbol_pair" name="symbol_pair">
+                    <option value="-">-</option>
+                    {% for symbol in symbols %}
+                    {% for symbol2 in symbols %}
+                    {% if symbol != symbol2 %}
                     <option value="{{symbol}}{{symbol2}}">{{symbol}}-{{symbol2}}</option>
-                  {% endif %}
-                {% endfor %}
-              {% endfor %}
-              </select>
-        </div>
-      </div>
-        <div class="form-group row">
-          <label for="duration" class="col-sm-2 col-form-label">Duration:</label>
-            <div class="col-sm-4">
-              <select class="form-control" id="duration" name="duration">
-                <option value="-">-</option>
-                {% for duration in duration_options %}
-                  <option value="{{duration}}">{{duration}}</option>
-                {% endfor %}
-              </select>
+                    {% endif %}
+                    {% endfor %}
+                    {% endfor %}
+                </select>
             </div>
         </div>
-<div class="form-group row">
-  <div class="col-sm-4">
-    <button type="submit" class="btn btn-primary">Calculate Stats</button>
-  </div>
+        <div class="form-group row">
+            <label for="duration" class="col-sm-2 col-form-label">Duration:</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="duration" name="duration">
+                    <option value="-">-</option>
+                    {% for duration in duration_options %}
+                    <option value="{{duration}}">{{duration}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-4">
+                <button type="submit" class="btn btn-primary">Calculate Stats</button>
+            </div>
+        </div>
+    </form>
 </div>
-      </form>
-    </div>
 {% endblock %}

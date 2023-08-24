@@ -1,34 +1,37 @@
 {% extends "base.html" %}
 {% block title %}Sign Up{% endblock %}
 {% block content %}
-    <form method="POST">
-        <h3 allign="center">Sign Up</h3>
-        <div class="form-group">
-            <label for="email"> Email Address</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="enter email"/>
-        </div>
-        <div class="form-group">
-            <label for="firstName"> First Name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="enter first name"/>
-        </div>
-        <div class="form-group">
-            <label for="password1">Password</label>
-            <input type="password" class="form-control" id="password1" name="password1" placeholder="enter password"/>
-        </div>
-        <div class="form-group">
-            <label for="password2">Confirm Password</label>
-            <input type="password" class="form-control" id="password2" name="password2" placeholder="confirm password"/>
-        </div>
-        <div class="form-group">
-            <label for="binanceKey">Binance API Authenticator Key</label>
-            <input type="text" class="form-control" id="binanceKey" name="binanceKey" placeholder="binance API key" title="Note: API key resets after 30 days, make sure you update it with the same key, otherwise your account will be turned useless!"/>
-        </div>
-        <div class="form-group">
-            <label for="binanceSecret">Binance API Secret Key</label>
-            <input type="text" class="form-control" id="binanceSecret" name="binanceSecret" placeholder="binance API Secret Key" title="Note: for privacy, edit the permissions so you stay safe, your info will be hashed!"/>
-        </div>
-        <br/>
+<form method="POST">
+    <h3 allign="center">Sign Up</h3>
+    <div class="form-group">
+        <label for="email"> Email Address</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="enter email"/>
+    </div>
+    <div class="form-group">
+        <label for="firstName"> First Name</label>
+        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="enter first name"/>
+    </div>
+    <div class="form-group">
+        <label for="password1">Password</label>
+        <input type="password" class="form-control" id="password1" name="password1" placeholder="enter password"/>
+    </div>
+    <div class="form-group">
+        <label for="password2">Confirm Password</label>
+        <input type="password" class="form-control" id="password2" name="password2" placeholder="confirm password"/>
+    </div>
+    <div class="form-group">
+        <label for="binanceKey">Binance API Authenticator Key</label>
+        <input type="text" class="form-control" id="binanceKey" name="binanceKey" placeholder="binance API key"
+               title="Note: API key resets after 30 days, make sure you update it with the same key, otherwise your account will be turned useless!"/>
+    </div>
+    <div class="form-group">
+        <label for="binanceSecret">Binance API Secret Key</label>
+        <input type="text" class="form-control" id="binanceSecret" name="binanceSecret"
+               placeholder="binance API Secret Key"
+               title="Note: for privacy, edit the permissions so you stay safe, your info will be hashed!"/>
+    </div>
+    <br/>
     <button type="submit" class="btn btn-primary">Submit</button>
     <button type="reset" class="btn btn-secondary">Clear</button>
-    </form>
+</form>
 {% endblock %}

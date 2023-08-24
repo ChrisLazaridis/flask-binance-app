@@ -2,20 +2,23 @@
 {% block title %} Order Book {% endblock %}
 {% block content %}
 <style>
-    .custom-container{
+    .custom-container {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         height: 90%;
     }
+
     .table-container {
         flex: 1;
         padding: 20px;
     }
+
     .custom-table {
         border-collapse: collapse;
         width: 100%;
     }
+
     .custom-table th, .custom-table td {
         border: 1px solid #ccc;
         padding: 8px;
@@ -24,7 +27,7 @@
 </style>
 
 <h1>Real Time Order Book for {{symbol}}</h1>
-<h7>Disclaimer: The following information is using only instructions issued through Binance</h7>
+<h2>Disclaimer: The following information is using only instructions issued through Binance</h2>
 <div class="chart-container">
     <canvas id="orderBookChart"></canvas>
 </div>
@@ -64,7 +67,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const bidsTable = document.getElementById("orderBookBids");
         const asksTable = document.getElementById("orderBookAsks");
 
@@ -74,18 +77,18 @@
         for (let i = 0; i < bidsTable.rows.length; i++) {
             let price = parseFloat(bidsTable.rows[i].cells[0].textContent);
             let quantity = parseFloat(bidsTable.rows[i].cells[1].textContent);
-            bidData.push({ x: price, y: quantity });
+            bidData.push({x: price, y: quantity});
         }
 
         for (let i = 0; i < asksTable.rows.length; i++) {
             let price = parseFloat(asksTable.rows[i].cells[0].textContent);
             let quantity = parseFloat(asksTable.rows[i].cells[1].textContent);
-            askData.push({ x: price, y: quantity });
+            askData.push({x: price, y: quantity});
         }
 
 
         const ctx = document.getElementById("orderBookChart").getContext("2d");
-        let chart = new Chart(ctx, {
+        new Chart(ctx, {
             type: "scatter",
             data: {
                 datasets: [

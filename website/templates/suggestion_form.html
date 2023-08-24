@@ -3,36 +3,37 @@
 {% block title %}Binance Flask App - Suggestion Form{% endblock %}
 
 {% block content %}
-  <div class="container">
+<div class="container">
     <h1>Suggestion Form</h1>
     <form id="suggestionForm" method="POST">
-      <div class="form-group">
-        <label for="suggestion">Your Suggestion:</label>
-        <textarea class="form-control" name="suggestion" id="suggestion" rows="5" cols="40" required></textarea>
-      </div>
-      <button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
-      <p id="responseMessage"></p>
+        <div class="form-group">
+            <label for="suggestion">Your Suggestion:</label>
+            <textarea class="form-control" name="suggestion" id="suggestion" rows="5" cols="40" required></textarea>
+        </div>
+        <button type="submit" id="submitBtn" class="btn btn-primary">Submit</button>
+        <p id="responseMessage"></p>
     </form>
-  </div>
-  <script>
-  // Function to set the timeout and handle the form submission
-  function handleSubmit(event) {
-    event.preventDefault();
-    const submitBtn = document.getElementById("submitBtn");
-    const responseMessage = document.getElementById("responseMessage");
-    const lastSubmissionTime = sessionStorage.getItem("lastSubmissionTime");
+</div>
+<script>
+    // Function to set the timeout and handle the form submission
+    function handleSubmit(event) {
+        event.preventDefault();
+        const submitBtn = document.getElementById("submitBtn");
+        const responseMessage = document.getElementById("responseMessage");
+        const lastSubmissionTime = sessionStorage.getItem("lastSubmissionTime");
 
-    if (!lastSubmissionTime || new Date() - new Date(lastSubmissionTime) >= 2 * 60 * 60 * 1000) {
-      sessionStorage.setItem("lastSubmissionTime", new Date().toString());
-      responseMessage.textContent = "";
-      event.target.submit();
-    } else {
-      const remainingTime = Math.ceil((2 * 60 * 60 * 1000 - (new Date() - new Date(lastSubmissionTime))) / 1000);
-      responseMessage.textContent = `Please wait before submitting your next suggestion. You can submit in ${remainingTime} seconds.`;
-      responseMessage.style.color = "red";
+        if (!lastSubmissionTime || new Date() - new Date(lastSubmissionTime) >= 2 * 60 * 60 * 1000) {
+            sessionStorage.setItem("lastSubmissionTime", new Date().toString());
+            responseMessage.textContent = "";
+            event.target.submit();
+        } else {
+            const remainingTime = Math.ceil((2 * 60 * 60 * 1000 - (new Date() - new Date(lastSubmissionTime))) / 1000);
+            responseMessage.textContent = `Please wait before submitting your next suggestion. You can submit in ${remainingTime} seconds.`;
+            responseMessage.style.color = "red";
+        }
     }
-  }
-  const suggestionForm = document.getElementById("suggestionForm");
-  suggestionForm.addEventListener("submit", handleSubmit);
+
+    const suggestionForm = document.getElementById("suggestionForm");
+    suggestionForm.addEventListener("submit", handleSubmit);
 </script>
 {% endblock %}
