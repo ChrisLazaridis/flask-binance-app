@@ -7,28 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00473387-3ac8-42ec-baac-8ce81548e032" name="Changes" comment="24/08/2023 (updated to bootstrapn 5)">
-      <change beforePath="$PROJECT_DIR$/.idea/flask-binance-app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/flask-binance-app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/edit_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/edit_account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/equity.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/equity.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/manager.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/manager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/news.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/news.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/order_book.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/order_book.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/sign_up.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/sign_up.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/stats.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/stats.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/suggestion_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/suggestion_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/templates/symbol_analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/website/templates/symbol_analysis.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/website/views.py" afterDir="false" />
-    </list>
+    <list default="true" id="00473387-3ac8-42ec-baac-8ce81548e032" name="Changes" comment="24/08/2023 (updated to bootstrapn 5)" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -290,7 +269,7 @@
       <workItem from="1692855797532" duration="8471000" />
       <workItem from="1692866579113" duration="1194000" />
       <workItem from="1692868714552" duration="1126000" />
-      <workItem from="1692871295632" duration="2878000" />
+      <workItem from="1692871295632" duration="2942000" />
     </task>
     <task id="LOCAL-00001" summary="some changes... still doesn't work">
       <created>1678782694642</created>
@@ -626,7 +605,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692864200303</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="24/08/2023 (updated to bootstrapn 5)">
+      <option name="closed" value="true" />
+      <created>1692879690714</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1692879690714</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
