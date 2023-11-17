@@ -306,3 +306,4 @@ def order_book():
             print(error_message)
             flash("An error occurred.", 'error')
             return render_template('symbol_analysis.html', user=current_user)
+

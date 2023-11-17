@@ -76,8 +76,9 @@
                     v: isNaN(volume) ? 0 : volume,
                 });
             }
+
             const mainCtx = document.getElementById("mainChart").getContext("2d");
-            new Chart(mainCtx, {
+            const mainChart = new Chart(mainCtx, {
                 type: "candlestick",
                 data: {
                     datasets: [
@@ -109,6 +110,25 @@
                                     enabled: true,
                                 },
                                 mode: 'x',
+                                onZoom: ({chart}, zoom) => {
+                                    if (zoom && zoom.start !== undefined && zoom.end !== undefined) {
+                                        const xAxis = chart.scales.x;
+                                        if (xAxis) {
+                                            const range = zoom.end - zoom.start;
+                                            const newMin = xAxis.getValueForPixel(
+                                                xAxis.getPixelForValue(zoom.start) +
+                                                (xAxis.getPixelForValue(zoom.end) - xAxis.getPixelForValue(zoom.start)) / 4
+                                            );
+                                            const newMax = xAxis.getValueForPixel(
+                                                xAxis.getPixelForValue(zoom.end) -
+                                                (xAxis.getPixelForValue(zoom.end) - xAxis.getPixelForValue(zoom.start)) / 4
+                                            );
+
+                                            chart.options.scales.x.min = newMin;
+                                            chart.options.scales.x.max = newMax;
+                                        }
+                                    }
+                                },
                             },
                             pan: {
                                 mode: 'x',
@@ -147,7 +167,6 @@
                 },
             });
 
-
             const volumeCtx = document.getElementById("volumeChart").getContext("2d");
             new Chart(volumeCtx, {
                 type: "bar",
@@ -175,8 +194,8 @@
                             adapter: 'moment',
                             title: {
                                 display: true,
-                                text: "Timestamp"
-                            }
+                                text: "Timestamp",
+                            },
                         },
                         y: {
                             title: {
@@ -188,6 +207,8 @@
                 },
             });
         }
-    })
+    });
 </script>
+
 {% endblock %}
+
